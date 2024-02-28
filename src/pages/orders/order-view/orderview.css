@@ -28,6 +28,7 @@
 
 .order-details strong {
   position: relative;
+  color: var(--background);
 }
 
 .order-soln,
@@ -40,6 +41,7 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  color: var(--background);
   background-color: var(--bg-color);
   border-radius: 4px;
 }
@@ -62,8 +64,44 @@
   padding: 0.3rem 0.7rem;
   border-radius: 2rem;
   font-size: 0.9rem;
+  text-align: center;
+  text-wrap: balance;
+}
+.category {
+  color: #fff;
+}
+.complete-order {
+  width: inherit;
+  background-color: var(--bg-color);
+  border: none;
+  border-radius: 10px;
+  color: #f5f5f5;
+  transition: transform 0.3s;
+  padding: 0.5rem 0.7rem;
+  cursor: pointer;
+  font-size: var(--fontsize-normal);
+  width: fit-content;
 }
 
+.complete-order:hover {
+  transform: scale(1.03);
+}
+
+.card-jobtitle {
+  bottom: 0;
+  font-size: 11px;
+  white-space: nowrap;
+  font-weight: 600;
+  color: var(--background);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.prof-disp-icon {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
 
 .order-soln div div {
   position: inherit;
@@ -100,7 +138,7 @@ textarea {
   width: 30%;
   padding: 1rem;
   justify-content: space-between;
-  color:var(--background);
+  color: var(--background);
   display: flex;
   flex-direction: row;
   transition: border 3s;
@@ -108,17 +146,49 @@ textarea {
 
 .solution_type {
   display: flex;
-  color:var(--background);
+  color: var(--background);
 }
 .uploadedAt {
   font-size: medium;
   padding-left: 90%;
-  color:var(--background);
+  color: var(--background);
   justify-content: flex-end;
   height: fit-content;
   position: inline;
   margin-right: 0.5rem;
 }
+
+.instructions {
+  line-height: 1.6;
+  font-family: inherit;
+  color: #fff;
+}
+
+.instructions strong {
+  height: auto;
+  width: auto;
+}
+.content {
+  display: flex;
+  height: fit-content;
+  width: auto;
+}
+
+.download-icon {
+  color: var(--secondary-color);
+  border: solid 1px;
+  border-radius: 50%;
+  border-style: dashed;
+  padding: 0.3rem;
+}
+
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: 1.6;
+  color: var(--background);
+}
+
 .chat-icon{
   display: none;
 }
@@ -142,6 +212,9 @@ textarea {
   position: inherit;
   width: 100%;
   display: flex;
+  color: var(--background);
+}
+
   justify-content: center;
 }
 
@@ -212,10 +285,10 @@ textarea {
 
 
 @media screen and (max-width: 900px) {
-  .order-view{
+  .order-view {
     display: flex;
   }
-  .floating-button{
+  .floating-button {
     position: fixed;
     border-radius: 100%;
     width: 80px;
@@ -226,7 +299,7 @@ textarea {
     right: 0;
     margin: 35px 25px;
   }
- .floating-button .chat-icon {
+  .floating-button .chat-icon {
     position: absolute;
     display: flex;
     justify-content: center;
@@ -255,17 +328,19 @@ textarea {
     right: 0;
     width: 89%;
     height: 100%;
-    background-color:var(--bg-color);
+    background-color: var(--bg-color);
     border-left: 1px solid #ccc;
     transition: transform 0.3s ease-in-out;
     transform: translateX(100%);
-    z-index: 998; 
+    z-index: 998;
   }
 
   .chat-drawer.show {
     transform: translateX(0);
   }
-  
+}
+
+@media screen and (max-width: 600px) {
 }
 
 @media screen and (max-width: 768px) {

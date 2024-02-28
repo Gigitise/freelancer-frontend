@@ -19,6 +19,8 @@ import { useUpdateModal } from "../../BiddingModal/UpdateModal";
 import { useDeleteModal } from "../../BiddingModal/DeleteModal";
 import { checkBid } from "../../../../utils/helpers/checkBid";
 import { toast } from "react-hot-toast";
+import RatingOrderView from "../../../components/rating/order-review/RatingOrderView";
+import { IoPersonSharp } from "react-icons/io5";
 
 const FloatingButton = ({ onClick }) => {
   return (
@@ -236,12 +238,15 @@ const OrderView = () => {
                 )}
               </div>
               <h2 className="card-jobtitle">
-                by{" "}
                 <Link
+                  className="prof-disp-icon"
                   to={`../client-profile/${orderContent.client.user.username}`}
                 >
+                  <div>
+                    <IoPersonSharp size={50} />
+                  </div>
                   <span>{orderContent.client.user.username}</span>
-                </Link>{" "}
+                </Link>
                 <span className="inline-flex ml-4">
                   {orderContent?.status != "Completed" && (
                     <div>
@@ -265,8 +270,9 @@ const OrderView = () => {
                 </span>
               </h2>
               {orderContent.rating && (
-                <div className="">
-                  <div className="flex gap-0.5">
+                <div className="review-box">
+                  <RatingOrderView order={orderContent} />
+                  {/* <div className="flex gap-0.5">
                     {[...Array(orderContent.rating.stars)].map((_, index) => (
                       <svg
                         key={index}
@@ -287,15 +293,15 @@ const OrderView = () => {
                         </svg>
                       )
                     )}
-                  </div>
-                  <div class="instructions mt-3">
+                  </div> */}
+                  {/* <div class="instructions mt-3">
                     <strong>OVERALL RATING</strong>
 
                     <article className="mt-1 ml-2">
                       <span className="mr-2  ">message:</span>
                       {orderContent.rating.message}
                     </article>
-                  </div>
+                  </div> */}
                 </div>
               )}
 
