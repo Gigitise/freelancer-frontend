@@ -85,36 +85,34 @@ const Profile = () => {
               </article>
             </div>
           </div>
-          <div className="prof-summary flex flex-wrap gap-4 w-full items-center mt-4">
-            <div className="prof-element justify-between p-4 border border-sky-300 flex items-center flex-1 text-gray-600">
-              <div className="flex items-center gap-2">
-                <MdTaskAlt className="text-white" size={iconSize} />
-                <article className="text-white">Total Orders</article>
-              </div>
-              <span className="">{userProfile?.orders_count}</span>
+          <div className='prof-summary grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full items-center mt-4'>
+            <div className='prof-element justify-between p-4 border border-sky-300 flex items-center w-full text-gray-600'>
+                <div className='flex items-center gap-2'>
+                    <MdTaskAlt className='text-sky-300' size={iconSize}/>
+                    <article className='text-white'>Total Orders</article>
+                </div>
+                <span className=''>{userProfile?.orders_count}</span>
             </div>
-            <div className="prof-element justify-between p-4 border border-sky-300 flex items-center flex-1 text-gray-600">
-              <div className="flex items-center gap-2">
-                <MdPendingActions className="text-white" size={iconSize} />
-                <article className="text-white">Orders in Progress</article>
-              </div>
-              <span className="">{ordersInProgress.count}</span>
+            <div className='prof-element justify-between p-4 border border-sky-300 flex items-center w-full text-gray-600'>
+                <div className='flex items-center gap-2'>
+                    <MdPendingActions className='text-sky-300' size={iconSize}/>
+                    <article className='text-white'>Orders in Progress</article>
+                </div>
+                <span className=''>{ordersInProgress.length}</span>
             </div>
-            <div className="prof-element justify-between p-4 border border-sky-300 flex items-center flex-1 text-gray-600">
-              <div className="flex items-center gap-2">
-                <MdOutlineAddTask className="text-white" size={iconSize} />
-                <article className="text-white">Orders completed</article>
-              </div>
-              <span className="">{ordersCompleted?.count}</span>
+            <div className='prof-element justify-between p-4 border border-sky-300 flex items-center w-full text-gray-600'>
+                <div className='flex items-center gap-2'>
+                    <MdOutlineAddTask className='text-sky-300' size={iconSize}/>
+                    <article className='text-white'>Orders completed</article>
+                </div>
+                <span className=''>{ordersCompleted?.length}</span>
             </div>
-            <div className="prof-element justify-between p-4 border border-sky-300 flex items-center flex-1 text-gray-600">
-              <div className="flex items-center gap-2">
-                <MdAccessTime className="text-white" size={iconSize} />
-                <article className="text-white">Last Login</article>
-              </div>
-              <article className="text-white">
-                {userProfile ? timeAgo(userProfile?.last_login) : "---"}
-              </article>
+            <div className='prof-element justify-between p-4 border border-sky-300 flex items-center w-full text-gray-600'>
+                <div className='flex items-center gap-2'>
+                    <MdAccessTime className='text-sky-300' size={iconSize}/>
+                    <article className='text-white'>Last Login</article>
+                </div>
+                <article className='text-white'>{userProfile ? timeAgo(userProfile?.last_login):'---'}</article>
             </div>
           </div>
           <div className="mt-5 flex flex-col space-y-2 mb-4">
