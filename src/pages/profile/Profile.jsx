@@ -7,6 +7,7 @@ import { MdAccessTime, MdTaskAlt } from "react-icons/md";
 import { MdModeEdit, MdAdd } from "react-icons/md";
 import { timeAgo } from "../../../utils/helpers/TimeAgo";
 import Transaction from "../../components/transactions/Transaction";
+import ProfilePlaceholder from '../../components/profile-placeholder/ProfilePlaceholder';
 import "./profile.css";
 
 const Profile = () => {
@@ -25,42 +26,11 @@ const Profile = () => {
   const [editBio, setEditBio] = useState(false);
   const [editedBio, setEditedBio] = useState(userProfile?.bio);
 
-  const fileInputRef = useRef(null);
-
   const toggleEditBio = () => {
     setEditBio(userProfile?.bio);
     setEditBio(!editBio);
   };
 
-  const openFileDialog = () => {
-    console.log("Open");
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
-  };
-
-  const updateProfilePhoto = (e) => {
-    const profilePhoto = e.target.files[0];
-    console.log("Submitted");
-
-    if (profilePhoto) {
-      if (profilePhoto.size <= 5 * 1024 * 1024) {
-        uploadProfilePhoto(profilePhoto, userProfile?.id).then((json) => {
-          const updateProfile = {
-            ...userProfile,
-            profile_photo: json.profile_photo,
-          };
-
-          userProfile.profile_photo = json.profile_photo;
-          setUserProfile(updateProfile);
-        });
-      } else {
-        console.log("Select lower resolution image");
-      }
-    } else {
-      console.log("Select correct img format");
-    }
-  };
   const submitEditedProfile = () => {
     if (userProfile.bio != editedBio) {
       submitNewBio(editedBio, userProfile?.id).then((response) => {
@@ -82,44 +52,11 @@ const Profile = () => {
       <div className="flex-1 flex flex-col">
         <div className="p-4 my-4">
           <div className="flex gap-3 items-center">
-            {userProfile?.profile_photo ? (
-              <img
-                style={{
-                  animation: loadingUserProfile
-                    ? `skeleton-loading 1s linear infinite alternate`
-                    : "",
-                }}
-                onClick={openFileDialog}
-                className=""
-                src={userProfile?.profile_photo}
-                alt="profile cover"
-              />
-            ) : (
-              <label
-                style={{
-                  animation: loadingUserProfile
-                    ? `skeleton-loading 1s linear infinite alternate`
-                    : "",
-                }}
-                htmlFor="upload-profile"
-                className="bg-sky-300 rounded-full w-16 p-4 text-center text-white text-2xl"
-              >
-                {userProfile &&
-                  `${
-                    userProfile?.username?.charAt(0)?.toUpperCase() +
-                    userProfile?.username.slice(1).slice(0, 1)
-                  }`}
-              </label>
-            )}
-            <input
-              id="upload-profile"
-              onChange={updateProfilePhoto}
-              ref={fileInputRef}
-              style={{ display: "none" }}
-              size={5 * 1024 * 1024}
-              accept="image/*"
-              type="file"
-            />
+          <ProfilePlaceholder
+                    uploadProfilePhoto={uploadProfilePhoto}
+                    userProfile={userProfile}
+                    loadingUserProfile={loadingUserProfile}
+                    setUserProfile={setUserProfile}/>
             <div className="space-y-1 text-gray-600">
               <article
                 className={loadingUserProfile ? "username-skeleton" : ""}
