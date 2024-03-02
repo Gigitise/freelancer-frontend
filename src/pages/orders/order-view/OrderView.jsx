@@ -67,7 +67,6 @@ const OrderView = () => {
     }
   };
   const openFileDialog = () => {
-    console.log("Opening file dialog");
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
@@ -98,7 +97,6 @@ const OrderView = () => {
     }
   };
 
-
   const getOrder = async (orderId) => {
     try {
       const getOrderById = await fetch(`${ordersUrl}${orderId}`, {
@@ -127,7 +125,6 @@ const OrderView = () => {
   };
 
   useEffect(() => {
-    console.log("Getting order.....");
     getOrder(orderId);
   }, [orderId]);
 
@@ -143,9 +140,10 @@ const OrderView = () => {
   );
   const { UpdateModal, setShowUpdateModal } = useUpdateModal(orderContent);
   const { DeleteModal, setShowDeleteModal } = useDeleteModal(setOrderContent);
-  const { SolutionModal, setShowSolutionModal } = useSolutionModal(orderContent,setOrderContent)
-
-  console.log(myBid);
+  const { SolutionModal, setShowSolutionModal } = useSolutionModal(
+    orderContent,
+    setOrderContent
+  );
 
   const [isChatOpen, setIsChatOpen] = useState(false);
 
@@ -160,12 +158,12 @@ const OrderView = () => {
           <BiddingModal />
           <UpdateModal />
           <DeleteModal />
-          <SolutionModal/>
+          <SolutionModal />
         </>
       )}
       {orderContent?.status === "In Progress" && (
         <>
-          <SolutionModal/>
+          <SolutionModal />
         </>
       )}
       {loading ? (
@@ -312,9 +310,11 @@ const OrderView = () => {
                           onClick={openFileDialog}
                           className="block w-[105px] md:w-full lg:w-full cursor-pointer  h-auto  border border-sky-300 border-dashed bg-accent px-3 py-2 text-sm transition  focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600 "
                         >
-                         <p className="text-center justify-center align-middle flex mt-1 truncate text-sky-400">
-                            {selectedFileName ? selectedFileName : "Upload solution"}
-                        </p>
+                          <p className="text-center justify-center align-middle flex mt-1 truncate text-sky-400">
+                            {selectedFileName
+                              ? selectedFileName
+                              : "Upload solution"}
+                          </p>
 
                           <input
                             onChange={(e) => {
@@ -352,35 +352,43 @@ const OrderView = () => {
 
                   {orderContent?.solution && (
                     <div className="flex items-center space-x-11 md:space-x-[69px]  h-[64px]">
-                    <a
-                      href={orderContent?.solution?.solution}
-                      id="solution-file"
-                      rel="noopener noreferrer"
-                      download
-                      className="block rounded-lg p-4 shadow-sm bg-accent w-[100px] md:max-w-[200px] lg:w-full truncate"
-                    >
-                      {typeof orderContent?.solution?.solution === "string"
-                        ? orderContent?.solution?.solution.substring(
-                            orderContent?.solution?.solution.lastIndexOf("/") + 1
-                          )
-                        : ""}
-                    </a>
-                    <div className="mt-2">
-    <dl>
-      <div>
-        <dd className={`text-[14px] ${solutionType === "Draft" ? "text-green-500" : "text-orange-500"}`}>
-          {orderContent?.solution?._type}
-        </dd>
-      </div>
-    </dl>
-  </div>
-                    <RiDeleteBin6Line
-                       onClick={() => setShowSolutionModal(true)}
-                      className="cursor-pointer text-white h-7 w-7 "
-                      size={64}
-                    />
-                    <span className="text-white">{uploadedAt}</span>
-                  </div>
+                      <a
+                        href={orderContent?.solution?.solution}
+                        id="solution-file"
+                        rel="noopener noreferrer"
+                        download
+                        className="block rounded-lg p-4 shadow-sm bg-accent w-[100px] md:max-w-[200px] lg:w-full truncate"
+                      >
+                        {typeof orderContent?.solution?.solution === "string"
+                          ? orderContent?.solution?.solution.substring(
+                              orderContent?.solution?.solution.lastIndexOf(
+                                "/"
+                              ) + 1
+                            )
+                          : ""}
+                      </a>
+                      <div className="mt-2">
+                        <dl>
+                          <div>
+                            <dd
+                              className={`text-[14px] ${
+                                solutionType === "Draft"
+                                  ? "text-green-500"
+                                  : "text-orange-500"
+                              }`}
+                            >
+                              {orderContent?.solution?._type}
+                            </dd>
+                          </div>
+                        </dl>
+                      </div>
+                      <RiDeleteBin6Line
+                        onClick={() => setShowSolutionModal(true)}
+                        className="cursor-pointer text-white h-7 w-7 "
+                        size={64}
+                      />
+                      <span className="text-white">{uploadedAt}</span>
+                    </div>
                   )}
                 </div>
               )}
@@ -458,13 +466,12 @@ const OrderView = () => {
             {(myBid ||
               orderContent?.freelancer?.user.username ===
                 loadedUserProfile?.username) && (
-              <div >
+              <div>
                 {window.innerWidth <= 900 && (
-              <FloatingButton onClick={toggleChat} />
-            )}
+                  <FloatingButton onClick={toggleChat} />
+                )}
               </div>
             )}
-            
           </>
         )
       )}
