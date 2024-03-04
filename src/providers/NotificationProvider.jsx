@@ -5,11 +5,13 @@ import { useAuthContext } from "./AuthProvider";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { timeFormater } from "../../utils/helpers/TimeFormater";
+import notifTone from "../assets/sounds/newMessageTone.wav";
 
 export const NotificationContext = createContext();
 
 export const NotificationProvider = (props) => {
   const { userToken } = useAuthContext();
+  const isSecureConnection = window.location.protocol === "https:";
 
   const { decodedToken } = useJwt(userToken);
 
@@ -130,7 +132,11 @@ export const NotificationProvider = (props) => {
 
     if (user) {
       const newSocket = new WebSocket(
-        `ws://127.0.0.1:8000/ws/notifications/${user}/`
+        `${
+          isSecureConnection
+            ? import.meta.env.VITE_WSS_URL
+            : import.meta.env.VITE_WS_URL
+        }/notifications/${user}/`
       );
       setSocket(newSocket);
 
@@ -139,6 +145,10 @@ export const NotificationProvider = (props) => {
         console.log(receivedData);
 
         if (receivedData.type === "new_notification") {
+          const sound = new Audio(notifTone);
+
+          sound.play();
+
           const newNotification = receivedData.message.notification;
           setNewNotification(newNotification);
           toast.success(<CustomToast newNotification={newNotification} />, {
@@ -146,10 +156,10 @@ export const NotificationProvider = (props) => {
             html: true,
           });
           setNotifications((prev) => {
-            const updatedNotif = [newNotification, ...prev];
-            getUnread(updatedNotif);
-            setNotifications(updatedNotif);
-            return updatedNotif;
+            return {
+              ...prev,
+              list: [newNotification].concat(prev.list),
+            };
           });
           receivedData.type = null;
         }
