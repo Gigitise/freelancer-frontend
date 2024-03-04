@@ -7,6 +7,7 @@ import { MdAccessTime, MdTaskAlt } from "react-icons/md";
 import { MdModeEdit, MdAdd } from "react-icons/md";
 import { timeAgo } from "../../../utils/helpers/TimeAgo";
 import Transaction from "../../components/transactions/Transaction";
+import ProfilePlaceholder from '../../components/profile-placeholder/ProfilePlaceholder';
 import "./profile.css";
 
 const Profile = () => {
@@ -25,42 +26,11 @@ const Profile = () => {
   const [editBio, setEditBio] = useState(false);
   const [editedBio, setEditedBio] = useState(userProfile?.bio);
 
-  const fileInputRef = useRef(null);
-
   const toggleEditBio = () => {
     setEditBio(userProfile?.bio);
     setEditBio(!editBio);
   };
 
-  const openFileDialog = () => {
-    console.log("Open");
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
-  };
-
-  const updateProfilePhoto = (e) => {
-    const profilePhoto = e.target.files[0];
-    console.log("Submitted");
-
-    if (profilePhoto) {
-      if (profilePhoto.size <= 5 * 1024 * 1024) {
-        uploadProfilePhoto(profilePhoto, userProfile?.id).then((json) => {
-          const updateProfile = {
-            ...userProfile,
-            profile_photo: json.profile_photo,
-          };
-
-          userProfile.profile_photo = json.profile_photo;
-          setUserProfile(updateProfile);
-        });
-      } else {
-        console.log("Select lower resolution image");
-      }
-    } else {
-      console.log("Select correct img format");
-    }
-  };
   const submitEditedProfile = () => {
     if (userProfile.bio != editedBio) {
       submitNewBio(editedBio, userProfile?.id).then((response) => {
@@ -82,44 +52,11 @@ const Profile = () => {
       <div className="flex-1 flex flex-col">
         <div className="p-4 my-4">
           <div className="flex gap-3 items-center">
-            {userProfile?.profile_photo ? (
-              <img
-                style={{
-                  animation: loadingUserProfile
-                    ? `skeleton-loading 1s linear infinite alternate`
-                    : "",
-                }}
-                onClick={openFileDialog}
-                className=""
-                src={userProfile?.profile_photo}
-                alt="profile cover"
-              />
-            ) : (
-              <label
-                style={{
-                  animation: loadingUserProfile
-                    ? `skeleton-loading 1s linear infinite alternate`
-                    : "",
-                }}
-                htmlFor="upload-profile"
-                className="bg-sky-300 rounded-full w-16 p-4 text-center text-white text-2xl"
-              >
-                {userProfile &&
-                  `${
-                    userProfile?.username?.charAt(0)?.toUpperCase() +
-                    userProfile?.username.slice(1).slice(0, 1)
-                  }`}
-              </label>
-            )}
-            <input
-              id="upload-profile"
-              onChange={updateProfilePhoto}
-              ref={fileInputRef}
-              style={{ display: "none" }}
-              size={5 * 1024 * 1024}
-              accept="image/*"
-              type="file"
-            />
+          <ProfilePlaceholder
+                    uploadProfilePhoto={uploadProfilePhoto}
+                    userProfile={userProfile}
+                    loadingUserProfile={loadingUserProfile}
+                    setUserProfile={setUserProfile}/>
             <div className="space-y-1 text-gray-600">
               <article
                 className={loadingUserProfile ? "username-skeleton" : ""}
@@ -148,36 +85,34 @@ const Profile = () => {
               </article>
             </div>
           </div>
-          <div className="prof-summary flex flex-wrap gap-4 w-full items-center mt-4">
-            <div className="prof-element justify-between p-4 border border-sky-300 flex items-center flex-1 text-gray-600">
-              <div className="flex items-center gap-2">
-                <MdTaskAlt className="text-white" size={iconSize} />
-                <article className="text-white">Total Orders</article>
-              </div>
-              <span className="">{userProfile?.orders_count}</span>
+          <div className='prof-summary grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full items-center mt-4'>
+            <div className='prof-element justify-between p-4 border border-sky-300 flex items-center w-full text-gray-600'>
+                <div className='flex items-center gap-2'>
+                    <MdTaskAlt className='text-sky-300' size={iconSize}/>
+                    <article className='text-white'>Total Orders</article>
+                </div>
+                <span className=''>{userProfile?.orders_count}</span>
             </div>
-            <div className="prof-element justify-between p-4 border border-sky-300 flex items-center flex-1 text-gray-600">
-              <div className="flex items-center gap-2">
-                <MdPendingActions className="text-white" size={iconSize} />
-                <article className="text-white">Orders in Progress</article>
-              </div>
-              <span className="">{ordersInProgress.count}</span>
+            <div className='prof-element justify-between p-4 border border-sky-300 flex items-center w-full text-gray-600'>
+                <div className='flex items-center gap-2'>
+                    <MdPendingActions className='text-sky-300' size={iconSize}/>
+                    <article className='text-white'>Orders in Progress</article>
+                </div>
+                <span className=''>{ordersInProgress.length}</span>
             </div>
-            <div className="prof-element justify-between p-4 border border-sky-300 flex items-center flex-1 text-gray-600">
-              <div className="flex items-center gap-2">
-                <MdOutlineAddTask className="text-white" size={iconSize} />
-                <article className="text-white">Orders completed</article>
-              </div>
-              <span className="">{ordersCompleted?.count}</span>
+            <div className='prof-element justify-between p-4 border border-sky-300 flex items-center w-full text-gray-600'>
+                <div className='flex items-center gap-2'>
+                    <MdOutlineAddTask className='text-sky-300' size={iconSize}/>
+                    <article className='text-white'>Orders completed</article>
+                </div>
+                <span className=''>{ordersCompleted?.length}</span>
             </div>
-            <div className="prof-element justify-between p-4 border border-sky-300 flex items-center flex-1 text-gray-600">
-              <div className="flex items-center gap-2">
-                <MdAccessTime className="text-white" size={iconSize} />
-                <article className="text-white">Last Login</article>
-              </div>
-              <article className="text-white">
-                {userProfile ? timeAgo(userProfile?.last_login) : "---"}
-              </article>
+            <div className='prof-element justify-between p-4 border border-sky-300 flex items-center w-full text-gray-600'>
+                <div className='flex items-center gap-2'>
+                    <MdAccessTime className='text-sky-300' size={iconSize}/>
+                    <article className='text-white'>Last Login</article>
+                </div>
+                <article className='text-white'>{userProfile ? timeAgo(userProfile?.last_login):'---'}</article>
             </div>
           </div>
           <div className="mt-5 flex flex-col space-y-2 mb-4">
