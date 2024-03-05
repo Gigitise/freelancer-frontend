@@ -21,7 +21,6 @@
   font-size: 23pt;
   font-weight: bold;
 }
-
 .actions {
   display: flex;
   flex-direction: column;
@@ -34,7 +33,7 @@
 .nav-item {
   border-radius: 2rem;
   border: solid var(--secondary-color) 1px;
-  transition: color 0.3s;
+  transition: background-color 0.3s;
   text-align: start;
   border-radius: 2px;
   padding: 0.7rem;
@@ -46,13 +45,42 @@
   text-decoration: none;
   background-color: var(--secondary-color);
   color: white;
+  /* justify-content: space-between; */
 }
 
+.num {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-item div span,
+.nav-item div {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.nav-item .count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-color);
+  border-radius: 50%;
+  width: 1rem;
+  height: 1rem;
+  box-sizing: border-box;
+  padding: 1rem;
+  transition: background-color 0.3s;
+}
 .nav-item:hover {
-  background-color: var(--secondary-color);
+  background-color: var(--bg-color);
   color: #fff;
   display: flex;
-  border: solid 1px #fff;
+}
+
+.nav-item:hover > .count {
+  background-color: var(--secondary-color);
 }
 
 .active-link {
@@ -100,7 +128,7 @@
 
   .show-side-bar {
     opacity: 1;
-    width: 50%;
+    width: 60%;
     transition: width 0.5s ease-in-out, opacity 0.5s ease-in-out;
   }
 
@@ -115,7 +143,6 @@
     z-index: 999999;
     padding-right: 2rem;
     height: auto;
-    width: auto;
     border-bottom: solid 1px var(--bg-color);
   }
 

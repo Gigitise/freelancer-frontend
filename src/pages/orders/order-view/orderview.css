@@ -25,7 +25,6 @@
   border-radius: 4px;
 }
 
-
 .order-details strong {
   position: relative;
 }
@@ -80,8 +79,6 @@
   gap: 1rem;
 }
 
-
-
 .order-soln div div {
   position: inherit;
   gap: 4rem;
@@ -117,7 +114,7 @@ textarea {
   width: 30%;
   padding: 1rem;
   justify-content: space-between;
-  color:var(--background);
+  color: var(--background);
   display: flex;
   flex-direction: row;
   transition: border 3s;
@@ -125,18 +122,18 @@ textarea {
 
 .solution_type {
   display: flex;
-  color:var(--background);
+  color: var(--background);
 }
 .uploadedAt {
   font-size: medium;
   padding-left: 90%;
-  color:var(--background);
+  color: var(--background);
   justify-content: flex-end;
   height: fit-content;
   position: inline;
   margin-right: 0.5rem;
 }
-.chat-icon{
+.chat-icon {
   display: none;
 }
 
@@ -226,13 +223,11 @@ textarea {
   border-radius: 4px;
 }
 
-
-
 @media screen and (max-width: 900px) {
-  .order-view{
+  .order-view {
     display: flex;
   }
-  .floating-button{
+  .floating-button {
     position: fixed;
     border-radius: 100%;
     width: 80px;
@@ -243,11 +238,11 @@ textarea {
     right: 0;
     margin: 35px 25px;
   }
- .floating-button .chat-icon {
+  .floating-button .chat-icon {
     position: absolute;
     display: flex;
     justify-content: center;
-    align-items:center;
+    align-items: center;
     width: 50px;
     height: 50px;
     bottom: 0;
@@ -272,26 +267,22 @@ textarea {
     right: 0;
     width: 89%;
     height: 100%;
-    background-color:var(--bg-color);
+    background-color: var(--bg-color);
     border-left: 1px solid #ccc;
     transition: transform 0.3s ease-in-out;
     transform: translateX(100%);
-    z-index: 998; 
+    z-index: 998;
   }
 
   .chat-drawer.show {
     transform: translateX(0);
   }
-  
 }
 
 @media screen and (max-width: 768px) {
- 
-
   .minimize {
     height: 55% !important;
   }
-
 
   .order-details {
     width: 100%;
@@ -306,10 +297,10 @@ textarea {
   .summary,
   .instructions,
   .attachments {
-    padding: 0.25rem;
+    padding: 0.5rem;
   }
 
   .rating {
-    padding: 0.25rem;
+    padding: 0.5rem;
   }
 }

@@ -40,7 +40,7 @@
 .search-nav input {
   position: relative;
   width: 90%;
-  padding: 1rem;
+  padding: 1.7rem 1.5rem;
   border-radius: 2rem;
   border: solid 1px var(--secondary-color);
   font-size: var(--fontsize-normal);
@@ -284,21 +284,18 @@
     display: none;
   }
   .search-nav {
-    width: 100%; 
-    margin-right: 0; 
+    width: 100%;
+    margin-right: 0;
   }
 
   .search-icon {
     margin-left: 0;
     display: flex;
-    margin-left: 4rem; 
-    
+    margin-left: 4rem;
   }
-
 
   .menu-icon {
     display: flex !important;
     align-items: center;
   }
-
 }
