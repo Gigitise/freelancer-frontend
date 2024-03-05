@@ -10,6 +10,7 @@ export const OrderContext = createContext();
 
 export const OrderProvider = (props) => {
   const navigate = useNavigate();
+  const isSecureConnection = window.location.protocol === "https:";
 
   const ordersUrl = `${import.meta.env.VITE_API_URL}/orders/`;
 
@@ -376,17 +377,27 @@ export const OrderProvider = (props) => {
     if (user) {
       console.log("Connected");
       const newSocket = new WebSocket(
-        `ws://127.0.0.1:8000/ws/order/freelancer/`
+        `${
+          isSecureConnection
+            ? import.meta.env.VITE_WSS_URL
+            : import.meta.env.VITE_WS_URL
+        }/order/freelancer/`
       );
       setSocket(newSocket);
       newSocket.onmessage = (event) => {
         const receivedData = JSON.parse(event.data);
         const newOrder = receivedData.message.order;
-        setOrders((prev) => {
-          const updatedOrders = [newOrder, ...prev];
-          setOrdersAvailable(updatedOrders);
-          return updatedOrders;
+        setOrdersAvailable((prev) => {
+          return {
+            ...prev,
+            orders: [newOrder].concat(prev.orders),
+          };
         });
+        // setOrders((prev) => {
+        //   const updatedOrders = [newOrder, ...prev];
+        //   setOrdersAvailable(updatedOrders);
+        //   return updatedOrders;
+        // });
       };
       setSocket(newSocket);
     } else {

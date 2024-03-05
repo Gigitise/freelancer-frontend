@@ -38,7 +38,7 @@ const Chat = ({ orderId, client, freelancer, isChatOpen, toggleChat }) => {
     if (chatBoxRef.current) {
       chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight * 2;
     }
-  }, [chats]);
+  }, [chats.list]);
 
   const submitMessage = (e) => {
     e.preventDefault();
@@ -82,9 +82,9 @@ const Chat = ({ orderId, client, freelancer, isChatOpen, toggleChat }) => {
         </div>
         <IoCloseOutline className="close-chat" onClick={toggleChat} size={24} />
       </div>
-      {chats?.length > 0 ? (
+      {chats.list?.length > 0 ? (
         <div className="messages-box" id="msg" ref={chatBoxRef}>
-          {chats?.map((msg, index) => {
+          {chats.list?.map((msg, index) => {
             return (
               <div
                 key={index}

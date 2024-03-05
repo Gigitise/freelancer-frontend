@@ -8,7 +8,6 @@ import ViewMore from "../../../components/more/ScrollMore";
 const InProgress = () => {
   const { ordersInProgress, loadingInProgress, getInProgress } =
     useOrderContext();
-  console.log(ordersInProgress);
   return loadingInProgress ? (
     <LoadingSkeletonOrder />
   ) : ordersInProgress.orders.length > 0 ? (

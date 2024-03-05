@@ -11,13 +11,19 @@ export const ChatContext = createContext();
 export const ChatProvider = (props) => {
   const { userToken } = useAuthContext();
 
+  const isSecureConnection = window.location.protocol === "https:";
+
   const { decodedToken } = useJwt(userToken);
 
   const [user, setUser] = useState();
 
   const [socket, setSocket] = useState(null);
 
-  const [chats, setChats] = useState([]);
+  const [chats, setChats] = useState({
+    count: null,
+    list: [],
+    next: null,
+  });
 
   const [loadingChats, setLoadingChats] = useState(true);
 
@@ -45,12 +51,11 @@ export const ChatProvider = (props) => {
       if (sendChat.ok) {
         const response = await sendChat.json();
         setChats((prev) => {
-          console.log(prev);
-          const updatedChats = [...prev, response];
-          setChats(updatedChats);
-          return updatedChats;
+          return {
+            ...prev.list,
+            list: prev.list.concat(response),
+          };
         });
-        return response.results;
       } else {
       }
     } catch (error) {
@@ -69,8 +74,14 @@ export const ChatProvider = (props) => {
       const chats = await getOrderChats.json();
 
       if (getOrderChats.ok) {
-        console.log(chats);
-        setChats(chats);
+        setChats((prev) => {
+          return {
+            ...prev,
+            list: prev.list.concat(chats.results),
+            count: chats.count,
+            next: chats.next,
+          };
+        });
       } else {
         console.error("Error fetching chats");
       }
@@ -84,17 +95,25 @@ export const ChatProvider = (props) => {
   useEffect(() => {
     setUser(decodedToken?.user_id);
     if (user) {
-      const newSocket = new WebSocket(`ws://127.0.0.1:8000/ws/chat/${user}/`);
+      const newSocket = new WebSocket(
+        `${
+          isSecureConnection
+            ? import.meta.env.VITE_WSS_URL
+            : import.meta.env.VITE_WS_URL
+        }/chat/${user}/`
+      );
       setSocket(newSocket);
 
       newSocket.onmessage = (event) => {
         const receivedData = JSON.parse(event.data);
+        console.log(receivedData);
         if (receivedData.type === "new_message") {
           const newChat = receivedData.message.sent_message;
           setChats((prev) => {
-            const updatedChats = [...prev, newChat];
-            setChats(updatedChats);
-            return updatedChats;
+            return {
+              ...prev,
+              list: prev.list.concat([newChat]),
+            };
           });
           const sound = new Audio(newMessageTone);
           sound.play();

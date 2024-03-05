@@ -52,21 +52,26 @@ const ClientProfile = () => {
       <div className="flex-1 flex flex-col">
         <div className="p-4 my-4">
           <div className="flex gap-3 items-center">
-            {clientData?.profile_photo ? (
+          {clientData?.profile_photo ? (
+            <div
+              className="rounded-full w-16 h-16 overflow-hidden"
+              style={{ width: '4rem', height: '4rem' }} 
+            >
               <img
-                className=""
+                className="w-full h-full object-cover"
                 src={clientData?.profile_photo}
                 alt="profile-cover"
               />
-            ) : (
-              <label className="bg-sky-300 rounded-full w-16 p-4 text-center text-white text-2xl">
-                {clientData &&
-                  `${
-                    clientData?.username.charAt(0).toUpperCase() +
-                    clientData?.username.slice(1).slice(0, 1)
-                  }`}
-              </label>
-            )}
+            </div>
+          ) : (
+            <label className="bg-sky-300 rounded-full w-16 p-4 text-center text-white text-2xl">
+              {clientData &&
+                `${
+                  clientData?.username.charAt(0).toUpperCase() +
+                  clientData?.username.slice(1).slice(0, 1)
+                }`}
+            </label>
+          )}
             <div className="space-y-1 text-gray-600">
               <article
                 className=""
@@ -88,20 +93,20 @@ const ClientProfile = () => {
               </article>
             </div>
           </div>
-          <div className="address text-white">
+          <div className="address text-white flex mt-10">
             <div className="address-element">
               {clientData?.address.country ? (
-                <>
-                  <article>{clientData?.address.country}</article>
+                <div className="flex mr-10">
+                  <article className="mr-10">{clientData?.address.country}</article>
                   <article>
                     {getUnicodeFlagIcon(`${clientData?.address.countryCode}`)}
                   </article>
-                </>
+                </div>
               ) : (
                 <span>Loading Country</span>
               )}
             </div>
-            <div className="address-element">
+            <div className="address-element ml-10">
               <span>Time Zone: </span>
               {clientData?.address.timezone}
             </div>
