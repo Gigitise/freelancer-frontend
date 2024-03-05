@@ -13,12 +13,27 @@
   display: flex;
   gap: 2rem;
   padding: 1rem;
-  color: #fff;
-  background-color: var(--bg-color);
   border-radius: 8px;
   align-items: center;
   justify-content: center;
 }
+
+.light-mode .settings-personal .feature-1 {
+  color: var(--text-color);
+  background-color: rgb(203 213 225);
+}
+
+.light-mode .feature-2{
+  color: var(--text-color);
+  background-color: rgb(203 213 225);
+}
+
+.dark-mode .settings-personal .feature-1,
+.feature-2 {
+  color: #fff;
+  background-color: var(--bg-color);
+}
+
 .feature-1 {
   cursor: pointer;
 }
@@ -26,6 +41,9 @@
   font-weight: 700;
 }
 
+.light-mode .pref-title{
+  color: var(--text-color);
+}
 .notifications-settings {
   position: inherit;
   padding: 2rem 0;
@@ -44,8 +62,8 @@
 .label-toggle {
   width: 54px;
   height: 25px;
-  position: relative;
   background-color: gray;
+  position: relative;
   border-radius: 12px;
   transition: 0.4s;
   cursor: pointer;
@@ -87,27 +105,48 @@
   color: white;
   left: 2px;
 }
+
+
+
 .pref {
   position: inherit;
-  background-color: var(--bg-color);
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   border-radius: 8px;
   overflow: hidden;
+}
+
+.light-mode .pref {
+  background-color: var(--accent-sec-color);
+}
+
+.dark-mode .pref {
+  background-color: var(--bg-color);
   border: solid 2px var(--bg-color);
 }
+
+
 
 .pref strong {
   font-weight: 700;
   padding: 1rem;
-  background-color: var(--secondary-color);
-  color: #fff;
   display: flex;
   gap: 2rem;
   align-items: center;
   justify-content: center;
 }
+
+.light-mode .pref strong {
+  color: var(--text-color);
+  background-color: rgb(203 213 225);
+}
+
+.dark-mode .pref strong {
+  background-color: var(--secondary-color);
+  color: #fff;
+}
+
 
 .pref div {
   display: flex;

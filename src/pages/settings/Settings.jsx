@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./settings.css";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { FaUser } from "react-icons/fa6";
@@ -7,9 +7,11 @@ import { MdAppSettingsAlt } from "react-icons/md";
 import { useState } from "react";
 import { useAuthContext } from "../../providers/AuthProvider";
 import toast from "react-hot-toast";
+import { ThemeContext } from "../../App";
 
 const Settings = () => {
   const { loadedUserProfile, userToken } = useAuthContext();
+  const { theme } = useContext(ThemeContext);
   const [userProfile] = useState(loadedUserProfile);
   const settings = userProfile?.settings;
   const [emailToggleStates, setEmailToggleStates] = useState({
@@ -77,7 +79,7 @@ const Settings = () => {
 
   const iconSize = 23;
   return (
-    <div className="settings-page">
+    <div className={`settings-page ${theme === "light" ? "light-mode" : "dark-mode"}`}>
       <div className="settings-content">
         <div className="settings-personal">
           <div className="feature-1">

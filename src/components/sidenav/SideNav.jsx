@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./sidenav.css";
 // import gigitise from '../../../../public/gigitise.svg';
 import { useNavigate } from "react-router-dom";
@@ -13,11 +13,13 @@ import {
 import { FiMenu } from "react-icons/fi";
 import { FaClockRotateLeft } from "react-icons/fa6";
 import { RiArrowRightSLine, RiArrowLeftSLine } from "react-icons/ri";
+import { ThemeContext } from "../../App";
 
 const SideNav = () => {
   const navigate = useNavigate();
   const [showSideBar, setShowSideBar] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const { theme } = useContext(ThemeContext);
 
   const iconSize = 22;
 
@@ -49,7 +51,8 @@ const SideNav = () => {
         <div
           className={`side-nav ${
             showSideBar ? "show-side-bar" : "hide-side-bar"
-          }`}
+          } ${theme === "light" ? "light-mode" : "dark-mode"} `}
+          style={{ backgroundColor: theme === "light" ? "#7fc2f5" : "" }}
         >
           {windowWidth <= 900 && (
             <div className="hide-icon">
