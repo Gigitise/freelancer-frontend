@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { timeAgo } from "../../../utils/helpers/TimeAgo";
 import { useNavigate } from "react-router-dom";
@@ -6,9 +6,11 @@ import { MdNotificationAdd } from "react-icons/md";
 import { useNotificationContext } from "../../providers/NotificationProvider";
 import "./notification.css";
 import ViewMore from "../../components/more/ScrollMore";
+import { ThemeContext } from "../../App";
 
 const Notification = () => {
   const navigate = useNavigate();
+  const { theme } = useContext(ThemeContext);
 
   const { notifications, loading, markNotificationRead, getNotifications } =
     useNotificationContext();
@@ -31,7 +33,7 @@ const Notification = () => {
   };
 
   return (
-    <div className="notifications">
+    <div className={`notifications ${theme === "light" ? "light-mode" : "dark-mode"}`}>
       {loading ? (
         <div className="notif-skeleton">
           <div className="notif-skeleton-content">

@@ -71,7 +71,7 @@ const BiddingModal = ({
 
   return (
     <Modal showModal={showBiddingModal} setShowModal={setBiddingModal}>
-      <div className="w-full overflow-hidden shadow-xl md:max-w-md md:rounded-2xl md:border md:border-gray-200">
+      <div className="w-full overflow-hidden shadow-xl md:max-w-md md:rounded-2xl md:border bg-gray-700 md:border-gray-700">
         <div className="relative p-4 w-full max-w-md max-h-full">
           <div className="relative  dark:bg-gray-700">
             {/* Modal body */}
@@ -79,7 +79,7 @@ const BiddingModal = ({
               <div className="flex items-center mb-4">
                 <span
                   htmlFor="price"
-                  className="block text-sm font-medium leading-6 text-gray-900"
+                  className="block text-sm font-medium leading-6 text-white"
                 >
                   Bidding Price
                 </span>
@@ -87,7 +87,7 @@ const BiddingModal = ({
                   title="Close bidding"
                   type="button"
                   onClick={handleCloseModal}
-                  className="text-gray-400   hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center "
+                  className="text-gray-200   hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center "
                 >
                   <svg
                     className="w-3 h-3"
@@ -116,7 +116,7 @@ const BiddingModal = ({
               )}
               <div className="relative mt-2 rounded-md shadow-sm">
                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                  <span className="text-gray-500 sm:text-sm">$</span>
+                  <span className="text-gray-200 sm:text-sm">$</span>
                 </div>
                 <input
                   style={{
@@ -132,7 +132,7 @@ const BiddingModal = ({
                   min={0}
                   defaultValue={order.amount}
                   onChange={watchAmount}
-                  className={`block w-full rounded-md py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset ${
+                  className={`block w-full rounded-md py-1.5 pl-7 pr-20 text-gray-100 bg-gray-600 ring-1 ring-inset ring-gray-700 placeholder:text-gray-400 focus:ring-2 focus:ring-inset ${
                     amtLow ? "focus:ring-red-600" : "focus:ring-sky-600"
                   } sm:text-sm sm:leading-6`}
                 />

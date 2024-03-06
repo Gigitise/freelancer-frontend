@@ -108,7 +108,7 @@ const Chat = ({ orderId, client, freelancer, isChatOpen, toggleChat }) => {
         </div>
       ) : (
         <div className="empty-inbox">
-          <IoChatbubblesSharp className="chat-icon" size={50} />
+          <IoChatbubblesSharp color="#fff" size={50} />
           <article>Start chat</article>
         </div>
       )}
@@ -116,6 +116,7 @@ const Chat = ({ orderId, client, freelancer, isChatOpen, toggleChat }) => {
         <input
           required
           type="text"
+          className="bg-gray-500 text-white"
           value={msg}
           ref={messageRef}
           onChange={checkMsg}

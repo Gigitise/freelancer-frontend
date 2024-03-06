@@ -81,6 +81,7 @@
   transition: border 3s;
 }
 
+
 .bio textarea {
   background-color: var(--bg-color) !important;
   color: #f5f5f5 !important;
@@ -115,8 +116,17 @@
 .save {
   position: relative;
   width: 5rem;
-  background-color: var(----primary-color);
+  background-color: var(--accent-sec-color);
   border: solid 1px var(--secondary-color);
   color: #fff;
   cursor: pointer;
+  border-radius: 8px;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  text-align: center;
+  transition: border-color 0.25s;
+  height: 40px;
+  transition: 0.5s;
 }
+

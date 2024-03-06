@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState, useRef } from "react";
 import { useAuthContext } from "../../providers/AuthProvider";
 import { useOrderContext } from "../../providers/OrderProvider";
@@ -9,6 +9,7 @@ import { timeAgo } from "../../../utils/helpers/TimeAgo";
 import Transaction from "../../components/transactions/Transaction";
 import ProfilePlaceholder from '../../components/profile-placeholder/ProfilePlaceholder';
 import "./profile.css";
+import { ThemeContext } from "../../App";
 
 const Profile = () => {
   const {
@@ -19,6 +20,7 @@ const Profile = () => {
     userToken,
   } = useAuthContext();
 
+  const { theme } = useContext(ThemeContext);
   const [userProfile, setUserProfile] = useState(loadedUserProfile);
 
   const { ordersCompleted, ordersInProgress } = useOrderContext();
@@ -93,17 +95,17 @@ const Profile = () => {
                 </div>
                 <span className=''>{userProfile?.orders_count}</span>
             </div>
-            <div className='prof-element justify-between p-4 border border-sky-300 flex items-center w-full text-gray-600'>
+            <div className='prof-element justify-between p-4 border border-sky-300 flex items-center w-full '>
                 <div className='flex items-center gap-2'>
                     <MdPendingActions className='text-sky-300' size={iconSize}/>
-                    <article className='text-white'>Orders in Progress</article>
+                    <article className=''>Orders in Progress</article>
                 </div>
                 <span className=''>{ordersInProgress.length}</span>
             </div>
-            <div className='prof-element justify-between p-4 border border-sky-300 flex items-center w-full text-gray-600'>
+            <div className='prof-element justify-between p-4 border border-sky-300 flex items-center w-full '>
                 <div className='flex items-center gap-2'>
                     <MdOutlineAddTask className='text-sky-300' size={iconSize}/>
-                    <article className='text-white'>Orders completed</article>
+                    <article className='dark:text-white'>Orders completed</article>
                 </div>
                 <span className=''>{ordersCompleted?.length}</span>
             </div>

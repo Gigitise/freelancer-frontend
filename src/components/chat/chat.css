@@ -131,11 +131,11 @@
   outline: none;
   font-size: medium;
   resize: none;
-  background-color: #e6e6e6;
+  background-color: gray;
 }
 
 .message-reply-box textarea::placeholder {
-  color: var(--text-color);
+  color: #f7fafc;
 }
 
 .submit-message {
