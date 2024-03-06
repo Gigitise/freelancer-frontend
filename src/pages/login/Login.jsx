@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from "react";
 import './login.css';
 import { useAuthContext } from '../../providers/AuthProvider';
 import { FiUser } from "react-icons/fi";
@@ -9,6 +9,8 @@ import LoadingDots from "../../icons/loading-dots";
 import { toast } from "react-hot-toast"
 import gigitise from '../../../public/gigitise.svg';
 import { Link } from 'react-router-dom';
+import { ThemeContext } from "../../App";
+
 
 const Login = () => {
   const iconSize = 30;
@@ -18,6 +20,7 @@ const Login = () => {
   const usernameRef = useRef()
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
+  const { theme } = useContext(ThemeContext);
   
   const togglePassword = () => {
     setVisible(!visible);
@@ -31,7 +34,7 @@ const Login = () => {
   }, [loginError]);
 
   return (
-    <div className='login-container'>
+    <div className={`login-container ${theme === "light" ? "light-mode" : "dark-mode"}`}>
           <div className="btn">
       <div className="brand-logo">
         <img src={gigitise} style={{ width: '6rem' }} alt="logo" />
