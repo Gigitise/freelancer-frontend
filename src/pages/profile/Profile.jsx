@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState, useRef } from "react";
 import { useAuthContext } from "../../providers/AuthProvider";
 import { useOrderContext } from "../../providers/OrderProvider";
@@ -9,6 +9,7 @@ import { timeAgo } from "../../../utils/helpers/TimeAgo";
 import Transaction from "../../components/transactions/Transaction";
 import ProfilePlaceholder from "../../components/profile-placeholder/ProfilePlaceholder";
 import "./profile.css";
+import { ThemeContext } from "../../App";
 
 const Profile = () => {
   const {
@@ -19,6 +20,7 @@ const Profile = () => {
     userToken,
   } = useAuthContext();
 
+  const { theme } = useContext(ThemeContext);
   const [userProfile, setUserProfile] = useState(loadedUserProfile);
 
   const { ordersCompleted, ordersInProgress } = useOrderContext();

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./navbar.css";
 import { IoMdNotificationsOutline, IoMdSettings } from "react-icons/io";
 import { useAuthContext } from "../../providers/AuthProvider";
@@ -12,9 +12,11 @@ import { MdKeyboardArrowLeft } from "react-icons/md";
 import { AiOutlineClose } from "react-icons/ai";
 import { IoIosLogOut } from "react-icons/io";
 import { useEffect, useRef } from "react";
+import { ThemeContext } from "../../App";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const { theme } = useContext(ThemeContext);
 
   const [showMoreElements, setShowMoreElements] = useState(false);
   const [searchVisible, setSearchVisible] = useState(true);
@@ -56,7 +58,8 @@ const Navbar = () => {
   };
 
   return (
-    <div className={`top-nav ${searchVisible ? "search-visible" : ""}`}>
+    <div className={`top-nav ${searchVisible ? "search-visible" : ""} ${theme === "light" ? "light-mode" : "dark-mode"} `}
+    style={{ backgroundColor: theme === "light" ? "#7fc2f5" : "" }}>
       <div className="icons">
         <div className="search-icon" onClick={() => setSearchVisible(!searchVisible)}>
         {searchVisible && (

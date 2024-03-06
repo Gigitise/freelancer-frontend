@@ -44,7 +44,7 @@ const Login = () => {
             required 
             id='username'
             ref={usernameRef} value={username} onChange={(e)=>setUsername(e.target.value)} 
-            className=''
+            className='bg-gray-700'
             type="text" 
             placeholder='Username'
           />
@@ -54,6 +54,7 @@ const Login = () => {
           <input 
             required 
             id='password' 
+            className='bg-gray-700'
             ref={passwordRef} value={password} onChange={(e)=>setPassword(e.target.value)} 
             type={visible ? "text" : "password"} 
             placeholder='Password' 
@@ -64,7 +65,7 @@ const Login = () => {
               <IoEyeOff onClick={togglePassword} className='password-icon-eye' size={20} />
           }
         </div>
-        <button type="submit">
+        <button className='Sign' type="submit">
           {loading ? <LoadingDots color="#1387E6" size={15} /> : 'Sign In'}
         </button>
       </form>

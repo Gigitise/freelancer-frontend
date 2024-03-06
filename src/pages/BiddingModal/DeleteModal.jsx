@@ -43,21 +43,20 @@ const DeleteModal = ({ showDeleteModal, setDeleteModal, setOrderContent }) => {
     <Modal showModal={showDeleteModal} setShowModal={setDeleteModal}>
       <div className="fixed inset-0 z-40 min-h-full overflow-y-auto overflow-x-hidden transition flex items-center">
         <div
-          aria-hidden="true"
           className="fixed inset-0 w-full h-full bg-black/50 cursor-pointer"
         ></div>
 
-        <div className="relative w-full cursor-pointer pointer-events-none transition my-auto p-4">
-          <div className="w-full py-2 bg-white cursor-default pointer-events-auto dark:bg-gray-800 relative rounded-xl mx-auto max-w-sm">
+        <div className="relative w-full cursor-pointer pointer-events-none transition my-auto p-4 ">
+          <div className="w-full py-2 bg-gray-700 cursor-default pointer-events-auto dark:bg-gray-800 relative rounded-xl mx-auto max-w-sm">
             <a
               onClick={handleCloseModal}
               type="button"
-              className="absolute top-2 right-2 rtl:right-auto rtl:left-2"
+              className="absolute top-2 right-2 rtl:right-auto rtl:left-2 "
             >
               <svg
                 title="Close"
                 tabIndex="-1"
-                className="h-4 w-4 cursor-pointer text-gray-400"
+                className="h-4 w-4 cursor-pointer text-gray-200"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
                 fill="currentColor"
@@ -73,14 +72,14 @@ const DeleteModal = ({ showDeleteModal, setDeleteModal, setOrderContent }) => {
             </a>
 
             <div className="space-y-2 p-2">
-              <div className="p-4 space-y-2 text-center dark:text-white">
+              <div className="p-4 space-y-2 text-center text-white">
                 <h2
                   className="text-xl font-bold tracking-tight"
                   id="page-action.heading"
                 >
                   Delete the created Bid
                 </h2>
-                <p className="text-gray-500">
+                <p className="text-gray-200">
                   Are you sure you would like to do this?
                 </p>
               </div>
@@ -89,7 +88,7 @@ const DeleteModal = ({ showDeleteModal, setDeleteModal, setOrderContent }) => {
             <div className="space-y-2">
               <div
                 aria-hidden="true"
-                className="border-t dark:border-gray-700 px-2"
+                className="border-t border-gray-400 px-2"
               ></div>
 
               <div className="px-6 py-2">
@@ -97,7 +96,7 @@ const DeleteModal = ({ showDeleteModal, setDeleteModal, setOrderContent }) => {
                   <button
                     onClick={handleCloseModal}
                     type="button"
-                    className="inline-flex items-center justify-center py-1 gap-1 font-medium rounded-lg border transition-colors outline-none focus:ring-offset-2 focus:ring-2 focus:ring-inset dark:focus:ring-offset-0 min-h-[2.25rem] px-4 text-sm text-gray-800 bg-white border-gray-300 hover:bg-gray-50 focus:ring-primary-600 focus:text-primary-600 focus:bg-primary-50 focus:border-primary-600 dark:bg-gray-800 dark:hover:bg-gray-700 dark:border-gray-600 dark:hover:border-gray-500 dark:text-gray-200 dark:focus:text-primary-400 dark:focus:border-primary-400 dark:focus:bg-gray-800"
+                    className="inline-flex items-center justify-center py-1 gap-1 font-medium rounded-lg border transition-colors outline-none focus:ring-offset-2 focus:ring-2 focus:ring-inset dark:focus:ring-offset-0 min-h-[2.25rem] px-4 text-sm text-gray-100 bg-gray-400 border-gray-300  focus:ring-primary-600 focus:text-primary-600 focus:bg-primary-50 focus:border-primary-600 dark:bg-gray-800 dark:hover:bg-gray-700 dark:border-gray-600 dark:hover:border-gray-500 dark:text-gray-200 dark:focus:text-primary-400 dark:focus:border-primary-400 dark:focus:bg-gray-800"
                   >
                     <span className="flex items-center gap-1">
                       <span>Cancel</span>

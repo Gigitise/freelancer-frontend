@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import { checkDeadline, formatDeadline } from '../../../utils/helpers/DeadlineFormat';
+import { ThemeContext } from "../../App";
+
 
 const OrderComponent = ({ content }) => {
   const navigate = useNavigate();
   const orderId = content.id;
+  const { theme } = useContext(ThemeContext);
 
   const deadline = formatDeadline(content.deadline);
   const deadlinePassed = checkDeadline(content.deadline);
@@ -14,7 +17,8 @@ const OrderComponent = ({ content }) => {
   const maxCharsToDisplay = 70;
 
   return (
-    <div className='order-content' onClick={() => navigate(`../order/${orderId}?status=${status.toLowerCase()}`)}>
+    <div className={`order-content ${theme === "light" ? "light-mode" : "dark-mode"}`}
+    onClick={() => navigate(`../order/${orderId}?status=${status.toLowerCase()}`)}>
       <div className='title-box'>
         <article>
           {(content.title.length > maxCharsToDisplay) ? `${(content.title).slice(0, 60)}...` : content.title}

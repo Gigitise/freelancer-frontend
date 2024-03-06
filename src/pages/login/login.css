@@ -20,8 +20,8 @@
   border-radius: 20px;
   padding: 40px;
   box-sizing: border-box;
-  background: #ecf0f3;
-  box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+  background-color: var(--bg-color);
+  
 }
 
 .brand-logo {
@@ -30,7 +30,6 @@
   margin: auto;
   border-radius: 50%;
   box-sizing: border-box;
-  box-shadow: 7px 7px 10px #cbced1, -7px -7px 10px white;
 }
 
 .brand-title {
@@ -69,10 +68,11 @@ label:nth-of-type(2) {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  
 }
 
 input::placeholder {
-  color: gray;
+  color: #ffff;
 }
 
 .login-content {
@@ -110,26 +110,24 @@ input {
   align-items: center;
 }
 
-button {
+.Sign {
   border-radius: 8px;
   border: 1px solid transparent;
+  border-color: var(--accent-sec-color);
   padding-top: 10px;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  text-align: center;
   cursor: pointer;
   transition: border-color 0.25s;
-  color: rgb(15, 11, 11);
   margin-top: 20px;
+  color: #ffff;
   background: #1da1f2;
   height: 40px;
   transition: 0.5s;
 }
 
-button:hover {
-  border-color: #646cff;
-}
 .register-prompt {
   display: flex;
   flex-direction: column;
@@ -138,9 +136,8 @@ button:hover {
   padding-top: 20px;
 }
 
-.register-prompt span a,
-.reset-password a {
-  color: var(--secondary-color);
+.register-prompt span a, .reset-password a{
+  color: var(--background);
   text-decoration: underline;
   cursor: pointer;
   text-decoration: none;

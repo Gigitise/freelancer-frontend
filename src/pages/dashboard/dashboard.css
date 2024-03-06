@@ -40,10 +40,16 @@
   gap: 1rem;
   cursor: pointer;
   transition: box-shadow 0.2s ease-in-out;
+}
+
+.light-mode .order-content {
+  background-color: #fff;
+  color: #fff;
+}
+
+.dark-mode .order-content {
   background-color: var(--bg-color);
   color: #fff;
-  /* background-color: var(--background); */
-  /* border: solid 1px var(--secondary-color); */
 }
 
 .order-content .title-box {
@@ -56,7 +62,11 @@
   font-weight: 700;
 }
 
-.order-content:hover {
+.dark-mode .title-box article {
+  color: #fff;
+}
+
+.dark-mode .order-content:hover {
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
 }
 
@@ -67,6 +77,10 @@
   font-size: var(--fontsize-small);
   display: flex;
   justify-content: space-between;
+}
+
+.dark-mode .bottom-box{
+  color: #fff;
 }
 
 .bidding-box article {
