@@ -40,12 +40,13 @@
   padding: 9px;
   border-radius: 50%;
   font-weight: bold;
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-right: 4px;
   font-size: 18pt;
+  width: 4rem;
+  aspect-ratio: 1;
 }
 
 .receiver-profile {
@@ -153,30 +154,28 @@
   color: gray;
 }
 
-
 .close-chat {
-  display: none; 
+  display: none;
 }
 
 @media screen and (max-width: 900px) {
-.chat {
-  box-sizing: border-box;
-  position: fixed;
-  background-color: var(--bg-color);
-  width: 100%; 
-  border-radius: 0; 
-  overflow: hidden;
-  bottom: 0;
-  right: 0;
-  z-index: 999; 
-  height: 100vh; 
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.close-chat {
-  display: block; 
-  cursor: pointer;
-}
-
+  .chat {
+    box-sizing: border-box;
+    position: fixed;
+    background-color: var(--bg-color);
+    width: 100%;
+    border-radius: 0;
+    overflow: hidden;
+    bottom: 0;
+    right: 0;
+    z-index: 999;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .close-chat {
+    display: block;
+    cursor: pointer;
+  }
 }
