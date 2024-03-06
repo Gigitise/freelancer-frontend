@@ -7,11 +7,13 @@ import {
 import getUnicodeFlagIcon from "country-flag-icons/unicode";
 import { useAuthContext } from "../../providers/AuthProvider";
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect,useContext } from "react";
+import { ThemeContext } from "../../App";
 
 const ClientProfile = () => {
   const { clientParam } = useParams();
   const { userToken } = useAuthContext();
+  const { theme } = useContext(ThemeContext);
 
   const [clientData, setClientData] = useState();
 
@@ -48,7 +50,7 @@ const ClientProfile = () => {
   const iconSize = 20;
 
   return (
-    <div className="flex">
+    <div className={`flex ${theme === "light" ? "light-mode" : "dark"}`}>
       <div className="flex-1 flex flex-col">
         <div className="p-4 my-4">
           <div className="flex gap-3 items-center">
@@ -64,7 +66,7 @@ const ClientProfile = () => {
               />
             </div>
           ) : (
-            <label className="bg-sky-300 rounded-full w-16 p-4 text-center text-white text-2xl">
+            <label className="bg-sky-300 rounded-full w-16 p-4 text-center dark:text-white text-2xl">
               {clientData &&
                 `${
                   clientData?.username.charAt(0).toUpperCase() +
@@ -72,15 +74,14 @@ const ClientProfile = () => {
                 }`}
             </label>
           )}
-            <div className="space-y-1 text-gray-600">
+            <div className="space-y-1 dark:text-gray-600">
               <article
-                className=""
+                className="dark:text-white"
                 style={{
                   fontWeight: "bold",
                   display: "flex",
                   gap: "1rem",
                   alignItems: "center",
-                  color: "#f7fafc",
                 }}
               >
                 {clientData?.username}
@@ -88,12 +89,12 @@ const ClientProfile = () => {
                   <MdVerified className="" size={iconSize} />
                 )}
               </article>
-              <article className="text-white">
+              <article className="dark:text-white">
                 {clientData?.first_name} {clientData?.last_name}
               </article>
             </div>
           </div>
-          <div className="address text-white flex mt-10">
+          <div className="address dark:text-white flex mt-10">
             <div className="address-element">
               {clientData?.address.country ? (
                 <div className="flex mr-10">
@@ -112,24 +113,24 @@ const ClientProfile = () => {
             </div>
           </div>
           <div className="prof-summary flex flex-wrap gap-4 w-full items-center mt-4">
-            <div className="prof-element justify-between p-4 border border-gray-600 flex items-center flex-1 text-gray-600">
+            <div className="prof-element justify-between p-4 border border-gray-600 flex items-center flex-1 dark:text-gray-600">
               <div className="flex items-center gap-2">
-                <MdTaskAlt className="text-white" size={iconSize} />
-                <article className="text-white">Total Orders</article>
+                <MdTaskAlt className="dark:text-white" size={iconSize} />
+                <article className="dark:text-white">Total Orders</article>
               </div>
               <span className="">{clientData?.orders_count}</span>
             </div>
             <div className="prof-element justify-between p-4 border border-gray-600 flex items-center flex-1 text-gray-600">
               <div className="flex items-center gap-2">
-                <MdPendingActions className="text-white" size={iconSize} />
-                <article className="text-white">Orders in Progress</article>
+                <MdPendingActions className="dark:text-white" size={iconSize} />
+                <article className="dark:text-white">Orders in Progress</article>
               </div>
               <span className="">{clientData?.in_progress}</span>
             </div>
             <div className="prof-element justify-between p-4 border border-gray-600 flex items-center flex-1 text-gray-600">
               <div className="flex items-center gap-2">
-                <MdOutlineAddTask className="text-white" size={iconSize} />
-                <article className="text-white">Orders completed</article>
+                <MdOutlineAddTask className="dark:text-white" size={iconSize} />
+                <article className="dark:text-white">Orders completed</article>
               </div>
               <span className="">{clientData?.completed}</span>
             </div>

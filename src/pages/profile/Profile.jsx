@@ -50,34 +50,33 @@ const Profile = () => {
   const iconSize = 25;
 
   return (
-    <div className="flex">
+    <div className={`flex ${theme === "light" ? "light-mode" : "dark"}`}>
       <div className="flex-1 flex flex-col">
         <div className="p-4 my-4">
-          <div className="flex gap-3 items-center">
+          <div className="flex gap-3 items-center dark:text-white">
             <ProfilePlaceholder
               uploadProfilePhoto={uploadProfilePhoto}
               userProfile={userProfile}
               loadingUserProfile={loadingUserProfile}
               setUserProfile={setUserProfile}
             />
-            <div className="space-y-1 text-gray-600">
+            <div className="space-y-1 dark:text-gray-600">
               <article
-                className={loadingUserProfile ? "username-skeleton" : ""}
+                className={`dark:text-white ${loadingUserProfile ? "username-skeleton" : ""}`}
                 style={{
                   fontWeight: "bold",
                   display: "flex",
                   gap: "1rem",
                   alignItems: "center",
-                  color: "#f7fafc",
                 }}
               >
                 {userProfile?.username}
                 {userProfile?.is_verified === "True" && (
-                  <MdVerified className="" size={iconSize} />
+                  <MdVerified className="dark:text-white" size={iconSize} />
                 )}
               </article>
               <article
-                className="text-white"
+                className="dark:text-white"
                 style={{
                   animation: loadingUserProfile
                     ? `skeleton-loading 1s linear infinite alternate`
@@ -89,33 +88,33 @@ const Profile = () => {
             </div>
           </div>
           <div className="prof-summary grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full items-center mt-4">
-            <div className="prof-element justify-between p-4 border border-sky-300 flex items-center w-full text-gray-600">
+            <div className="prof-element justify-between p-4 border border-sky-300 flex items-center w-full dark:text-gray-600">
               <div className="flex items-center gap-2">
                 <MdTaskAlt className="text-sky-300" size={iconSize} />
-                <article className="text-white">Total Orders</article>
+                <article className="dark:text-white">Total Orders</article>
               </div>
               <span className="">{userProfile?.orders_count}</span>
             </div>
-            <div className="prof-element justify-between p-4 border border-sky-300 flex items-center w-full text-gray-600">
+            <div className="prof-element justify-between p-4 border border-sky-300 flex items-center w-full dark:text-gray-600">
               <div className="flex items-center gap-2">
                 <MdPendingActions className="text-sky-300" size={iconSize} />
-                <article className="text-white">Orders in Progress</article>
+                <article className="dark:text-white">Orders in Progress</article>
               </div>
-              <span className="">{ordersInProgress.length}</span>
+              <span className="dark:text-white">{ordersInProgress.length}</span>
             </div>
-            <div className="prof-element justify-between p-4 border border-sky-300 flex items-center w-full text-gray-600">
+            <div className="prof-element justify-between p-4 border border-sky-300 flex items-center w-full dark:text-gray-600">
               <div className="flex items-center gap-2">
                 <MdOutlineAddTask className="text-sky-300" size={iconSize} />
-                <article className="text-white">Orders completed</article>
+                <article className="dark:text-white">Orders completed</article>
               </div>
               <span className="">{ordersCompleted?.length}</span>
             </div>
-            <div className="prof-element justify-between p-4 border border-sky-300 flex items-center w-full text-gray-600">
+            <div className="prof-element justify-between p-4 border border-sky-300 flex items-center w-full dark:text-gray-600">
               <div className="flex items-center gap-2">
                 <MdAccessTime className="text-sky-300" size={iconSize} />
-                <article className="text-white">Last Login</article>
+                <article className="dark:text-white">Last Login</article>
               </div>
-              <article className="text-white">
+              <article className="dark:text-white">
                 {userProfile ? timeAgo(userProfile?.last_login) : "---"}
               </article>
             </div>

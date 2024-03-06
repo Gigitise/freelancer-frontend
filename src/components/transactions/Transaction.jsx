@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./transaction.css";
 import { timeAgo } from "../../../utils/helpers/TimeAgo";
 import { useState } from "react";
 import PulseLoader from "react-spinners/PulseLoader";
 import ViewMore from "../more/ScrollMore";
+import { ThemeContext } from "../../App";
 
 const Transaction = ({ user, userToken }) => {
   const [loadingTransactions, setLoadingTransactions] = useState(true);
+  const { theme } = useContext(ThemeContext);
 
   const [transactions, setTransactions] = useState({
     list: [],
@@ -49,7 +51,7 @@ const Transaction = ({ user, userToken }) => {
           <PulseLoader size={10} color="#7fc2f5" />
         </div>
       ) : (
-        <div className="transactions">
+        <div className={`transactions ${theme === "light" ? "light-mode" : "dark-mode"}`}>
           <table className="transaction-table">
             <thead>
               <tr>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./orderview.css";
 import { IoMdDownload } from "react-icons/io";
 import { RiDeleteBin6Line } from "react-icons/ri";
@@ -23,6 +23,7 @@ import { useSolutionModal } from "../../BiddingModal/SolutionModal";
 import { toast } from "react-hot-toast";
 import RatingOrderView from "../../../components/rating/order-review/RatingOrderView";
 import { IoPersonSharp } from "react-icons/io5";
+import { ThemeContext } from "../../../App";
 
 const FloatingButton = ({ onClick }) => {
   return (
@@ -36,6 +37,7 @@ const OrderView = () => {
   const ordersUrl = `${import.meta.env.VITE_API_URL}/orders/`;
 
   const { userToken, loadedUserProfile } = useAuthContext();
+  const { theme } = useContext(ThemeContext);
 
   const navigate = useNavigate();
 
@@ -152,7 +154,8 @@ const OrderView = () => {
   };
 
   return (
-    <div className="order-view">
+    <div className={`order-view ${theme === "light" ? "light-mode" : "dark-mode"}`}
+    style={{ Color: theme === "light" ? "#535354" : "" }}>
       {orderContent?.status === "Available" && (
         <>
           <BiddingModal />
@@ -393,7 +396,7 @@ const OrderView = () => {
                 </div>
               )}
               <div className="instructions">
-                <strong className="text-white">
+                <strong className="text">
                   {orderContent?.status === "In Progress" ||
                   orderContent?.status === "Available"
                     ? orderContent?.instructions
@@ -416,7 +419,7 @@ const OrderView = () => {
                     <div style={{ height: "1.5rem" }}></div>
                   ) : (
                     <strong style={{ height: "1.5rem" }}>
-                      <p className="text-white">
+                      <p className="text">
                         {" "}
                         {orderContent?.attachment
                           ? "Attachments"
