@@ -14,12 +14,14 @@ import { FiMenu } from "react-icons/fi";
 import { FaClockRotateLeft } from "react-icons/fa6";
 import { RiArrowRightSLine, RiArrowLeftSLine } from "react-icons/ri";
 import { ThemeContext } from "../../App";
+import { useOrderContext } from "../../providers/OrderProvider";
 
 const SideNav = () => {
   const navigate = useNavigate();
   const [showSideBar, setShowSideBar] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const { theme } = useContext(ThemeContext);
+  const { ordersAvailable, ordersInProgress } = useOrderContext();
 
   const iconSize = 22;
 
@@ -71,17 +73,26 @@ const SideNav = () => {
             Gigitise
           </h1>
           <div className="actions">
-            <NavLink to="/app" className="nav-item" activeClassName="active-link">
+            <NavLink
+              to="/app"
+              className="nav-item"
+              activeClassName="active-link"
+            >
               <FiMenu size={iconSize} />
               Dashboard
             </NavLink>
             <NavLink
               to="./available"
-              className="nav-item"
+              className="nav-item num"
               activeClassName="active-link"
             >
-              <FaClockRotateLeft size={iconSize} />
-              Available
+              <div>
+                <span>
+                  <FaClockRotateLeft size={iconSize} />
+                </span>
+                <span>Available</span>
+              </div>
+              <span className="count">{ordersAvailable.count}</span>
             </NavLink>
             <NavLink
               to="./my-bids"
@@ -89,18 +100,23 @@ const SideNav = () => {
               activeClassName="active-link"
             >
               <MdAccessTime size={iconSize} />
-          My Bids
+              My Bids
             </NavLink>
             <NavLink
               to="./in-progress"
-              className="nav-item"
+              className="nav-item num"
               activeClassName="active-link"
             >
-              <MdPendingActions size={iconSize} />
-          In Progress
+              <div>
+                <span>
+                  <MdPendingActions size={iconSize} />
+                </span>
+                <span>In Progress</span>
+              </div>
+              <span className="count">{ordersInProgress.count}</span>
             </NavLink>
             <NavLink
-               to="./completed"
+              to="./completed"
               className="nav-item"
               activeClassName="active-link"
             >

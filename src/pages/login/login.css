@@ -1,9 +1,9 @@
 /* Update styles to use a specific class or ID for the Login component */
 .login-container {
   margin: 2;
-  width: 100vw;
-  height: 100vh;
-  background: var(--secondary-color);
+  width: 100dvw;
+  height: 100dvh;
+  background: #ecf0f3;
   display: flex;
   align-items: center;
   text-align: center;
@@ -36,7 +36,7 @@
   margin-top: 10px;
   font-weight: 900;
   font-size: 1.8rem;
-  color: #1DA1F2;
+  color: #1da1f2;
   letter-spacing: 1px;
 }
 
@@ -45,7 +45,9 @@
   margin-top: 30px;
 }
 
-label, input, button {
+label,
+input,
+button {
   display: block;
   width: 100%;
   border: none;
@@ -74,28 +76,28 @@ input::placeholder {
 }
 
 .login-content {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
 }
 
 .username-icon,
 .password-icon {
-    margin-right: 10px; 
-    color: var(--background);
+  margin-right: 10px;
+  color: #1a1a1a;
 }
 
 .password-input {
-    display: flex;
-    align-items: center;
-    position: relative;
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
 .password-icon-eye {
-    position: absolute;
-    right: 50px;
-    cursor: pointer;
-    color: #ffff; 
+  position: absolute;
+  right: 50px;
+  cursor: pointer;
+  color: gray;
 }
 
 input {
@@ -106,7 +108,6 @@ input {
   display: flex;
   flex-direction: column;
   align-items: center;
-  
 }
 
 .Sign {
@@ -122,6 +123,7 @@ input {
   transition: border-color 0.25s;
   margin-top: 20px;
   color: #ffff;
+  background: #1da1f2;
   height: 40px;
   transition: 0.5s;
 }
@@ -141,6 +143,7 @@ input {
   text-decoration: none;
 }
 
-.register-prompt span a:hover, .reset-password a:hover {
+.register-prompt span a:hover,
+.reset-password a:hover {
   text-decoration: underline;
 }

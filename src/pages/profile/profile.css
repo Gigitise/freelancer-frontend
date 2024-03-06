@@ -1,6 +1,6 @@
-* {
+/* * {
   --accent-sec-color: #7fc2f5;
-}
+} */
 .prof-img,
 .profile-placeholder {
   position: relative;
@@ -11,22 +11,24 @@
   justify-content: center;
   width: 4rem;
   height: 4rem;
-  background-color: var(--accent-sec-color);
 }
 
-.prof-img, .img-placeholder-profile {
+.prof-img,
+.img-placeholder-profile {
   text-align: center;
   line-height: 4rem;
   color: #fff;
   font-size: 1.5rem;
 }
 
-
-.prof-img img, .img-placeholder-profile img {
+.prof-img img,
+.img-placeholder-profile {
   width: 100%;
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
+  display: flex;
+  align-items: center;
 }
 
 .edit-profile-icon {
@@ -35,7 +37,7 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  transition: opacity 0.3s ease; 
+  transition: opacity 0.3s ease;
   opacity: 0;
   display: flex;
   align-items: center;
@@ -80,7 +82,6 @@
   border-radius: 4px;
   transition: border 3s;
 }
-
 
 .bio textarea {
   background-color: var(--bg-color) !important;
@@ -129,4 +130,3 @@
   height: 40px;
   transition: 0.5s;
 }
-
