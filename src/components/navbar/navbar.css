@@ -20,6 +20,7 @@
   width: 100% !important;
 }
 
+
 .search-nav {
   position: relative;
   width: 50%;
@@ -150,11 +151,7 @@
   /* color: var(--secondary-color); */
 }
 
-.profile div {
-  display: flex;
-  align-items: center;
-  font-weight: bold;
-}
+
 
 .profile div img,
 .img-placeholder {
@@ -229,10 +226,17 @@
 }
 
 @media screen and (max-width: 768px) {
+ 
   .desc {
     display: block;
   }
 
+  .profile-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+  }
   .notif-bell {
     padding: 0rem;
   }
@@ -247,11 +251,9 @@
     border: none;
     padding: 0;
   }
-  .mini-elements *:hover {
-    transform: translate(0);
-    border: none;
-  }
+  
   .mini-elements {
+    display: none; /* Initially hide the mini-elements */
     position: absolute;
     flex-direction: column !important;
     background-color: #4e5868;
@@ -260,36 +262,33 @@
     padding: 1rem 2rem;
     cursor: pointer;
   }
-
-  .mini-elements div {
-    position: relative;
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    gap: 4rem;
+  
+  .light-mode .mini-elements {
+    background-color: var(--accent-sec-color);
   }
-
-  .hide-mini-elements div {
-    width: 0 !important;
+  
+  .dark-mode .mini-elements {
+    background-color: #4e5868;
   }
-
+  
+  /* Show and hide animations */
   .show-mini-elements {
     display: flex;
-    width: auto;
-    height: auto;
     opacity: 1;
-    transition: width 0.5s ease;
+    transition: opacity 0.5s ease;
   }
-
+  
   .hide-mini-elements {
-    width: 0;
+    display: none; /* Completely hide the mini-elements when not active */
     opacity: 0;
-    transition: width 0.5s ease, opacity 0.5s ease;
+    transition: opacity 0.5s ease;
   }
+  
 
   .menu-icon {
     display: flex !important;
     align-items: center;
+    cursor: pointer; /* Add cursor pointer to indicate it's clickable */
   }
 }
 

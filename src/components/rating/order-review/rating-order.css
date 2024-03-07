@@ -8,6 +8,15 @@
   display: flex;
   gap: 0.5rem;
 }
+.dark-mode .rating-order-view {
+  color: #fff;
+  background-color: var(--bg-color);
+}
+.light-mode .rating-order-view {
+  color: var(--text-color);
+  background-color: var(--background);
+
+}
 .review-content {
   display: flex;
   flex-direction: column;

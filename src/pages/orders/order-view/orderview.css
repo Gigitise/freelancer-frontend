@@ -59,7 +59,7 @@
 
 .light-mode,
 .instruction {
-  background-color: aliceblue;
+  background-color: #fff;
 }
 .dark-mode 
 .instructions {
@@ -81,6 +81,13 @@ color:#535354;
 
 .solutions {
   display: flex;
+}
+
+.light-mode .order-soln{
+  background-color: rgb(226 232 240);
+}
+.dark-mode .order-soln{
+  background-color: var(--bg-color);
 }
 
 .order-elements,
@@ -153,7 +160,6 @@ textarea {
 .solution-details {
   display: flex;
   gap: 4rem;
-  position: inherit;
   position: inherit;
   width: 30%;
   padding: 1rem;
