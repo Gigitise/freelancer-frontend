@@ -37,7 +37,7 @@
 }
 .dark-mode .rating{
   border: solid 1px var(--secondary-color);
-  background-color: var(--bg-color);
+  background-color: rgb(71 85 105);
 }
 
 .order-details strong {
@@ -63,11 +63,11 @@
 }
 .dark-mode 
 .instructions {
-  background-color: var(--bg-color);
+  background-color: rgb(71 85 105);
 }
 
 .dark-mode .attachments{
-  background-color: var(--bg-color);
+  background-color: rgb(71 85 105);
 }
 
 .light-mode .text {
@@ -87,7 +87,7 @@ color:#535354;
   background-color: rgb(226 232 240);
 }
 .dark-mode .order-soln{
-  background-color: var(--bg-color);
+  background-color: rgb(71 85 105);
 }
 
 .order-elements,

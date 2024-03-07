@@ -45,11 +45,6 @@
   display: none;
 }
 
-/* Light mode specific styles */
-.light-mode,
-.side-nav {
-  border-right: solid 1px #fff;
-}
 
 .light-mode .heading-logo {
   color: #ffff;

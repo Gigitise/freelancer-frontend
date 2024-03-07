@@ -282,7 +282,7 @@ const OrderView = () => {
 
               {(orderContent.status === "Completed" ||
                 orderContent.status === "In Progress") && (
-                <div className="order-soln bg-slate-200">
+                <div className="order-soln ">
                   {orderContent?.solution && loadingAttachemnt ? (
                     <div className="animate-pulse"></div>
                   ) : (
@@ -295,7 +295,7 @@ const OrderView = () => {
                             <input
                               onChange={uploadAttachmentFile}
                               ref={fileInputRef}
-                              className="hidden bg-white"
+                              className="hidden "
                               size={20 * 1024 * 1024}
                               type="file"
                               name=""
@@ -354,7 +354,7 @@ const OrderView = () => {
                     )}
 
                   {orderContent?.solution && (
-                    <div className="flex items-center space-x-11 md:space-x-[69px] bg-slate-200  h-[64px]">
+                    <div className="flex items-center space-x-11 md:space-x-[69px]   h-[64px]">
                       <a
                         href={orderContent?.solution?.solution}
                         id="solution-file"

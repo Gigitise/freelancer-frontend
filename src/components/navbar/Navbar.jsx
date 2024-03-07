@@ -59,7 +59,7 @@ const Navbar = () => {
 
   return (
     <div className={`top-nav ${searchVisible ? "search-visible" : ""} ${theme === "light" ? "light-mode" : "dark-mode"} `}
-    style={{ backgroundColor: theme === "light" ? "#7fc2f5" : "" }}>
+    style={{ backgroundColor: theme === "light" ? "#7fc2f5" : "", borderBottom: theme === "light" ? "#fff" : "" }}>
       <div className="icons">
         <div className="search-icon" onClick={() => setSearchVisible(!searchVisible)}>
         {searchVisible && (

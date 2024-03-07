@@ -54,7 +54,10 @@ const SideNav = () => {
           className={`side-nav ${
             showSideBar ? "show-side-bar" : "hide-side-bar"
           } ${theme === "light" ? "light-mode" : "dark-mode"} `}
-          style={{ backgroundColor: theme === "light" ? "#7fc2f5" : "" }}
+          style={{
+            backgroundColor: theme === "light" ? "#7fc2f5" : "",
+            borderRight: theme === "light" ? "2px solid #fff" : ""
+          }}
         >
           {windowWidth <= 900 && (
             <div className="hide-icon">

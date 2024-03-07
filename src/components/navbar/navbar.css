@@ -16,7 +16,7 @@
   z-index: 1;
   height: 10dvh;
   color: #fff;
-  border-bottom: solid 1px var(--bg-color);
+  border-bottom: solid 1px rgb(71 85 105);
   width: 100% !important;
 }
 
@@ -46,7 +46,7 @@
   border: solid 1px var(--secondary-color);
   font-size: var(--fontsize-normal);
   outline-color: var(--secondary-color);
-  background-color: var(--bg-color);
+  background-color: rgb(71 85 105);
   color: #fff;
 }
 

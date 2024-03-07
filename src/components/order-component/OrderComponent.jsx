@@ -18,6 +18,9 @@ const OrderComponent = ({ content }) => {
 
   return (
     <div className={`order-content ${theme === "light" ? "light-mode" : "dark-mode"}`}
+    style={{
+      backgroundColor: theme === "dark" ? "#404c5e" : "",      
+          }}
     onClick={() => navigate(`../order/${orderId}?status=${status.toLowerCase()}`)}>
       <div className='title-box'>
         <article>
