@@ -7,14 +7,19 @@
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
   border-radius: 50%;
   justify-content: center;
   width: 4rem;
   height: 4rem;
+  background-color: var(--accent-sec-color);
 }
 
 .prof-img,
 .img-placeholder-profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   line-height: 4rem;
   color: #fff;
@@ -94,6 +99,19 @@
 
 .bio:hover {
   border: dashed 1px #fff;
+}
+
+.address {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  color: #fff;
+  margin: 2rem 0;
+}
+
+.address .address-element {
+  display: flex;
+  gap: 2rem;
+  padding: 0.5rem;
 }
 
 .prof-element {
