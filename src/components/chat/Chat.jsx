@@ -111,7 +111,7 @@ const Chat = ({ orderId, client, freelancer, isChatOpen, toggleChat }) => {
       ) : (
         <div className="empty-inbox">
           <IoChatbubblesSharp className="icon-1" size={50} />
-          <article>Start chat</article>
+          <article className="holder">Start chat</article>
         </div>
       )}
       <form className="message-reply-box" onSubmit={submitMessage}>

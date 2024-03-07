@@ -16,7 +16,7 @@
   background-color: var(--background);
 }
 .dark-mode .chat{
-  background-color: var(--bg-color);
+  background-color: rgb(71 85 105);
 } 
 
 .chat-header {
@@ -27,7 +27,6 @@
   position: relative;
   padding: 0.5rem;
   height: fit-content;
-  border-bottom: solid 1px var(--secondary-color);
 }
 
 .hide-icon-chat {
@@ -80,7 +79,12 @@
 .dark-mode .icon-1{
   color: #fff;
 }
-
+.light-mode .holder{
+  color:var(--text-color)
+}
+.dark-mode .holder{
+  color: var(--background);
+}
 .empty-inbox {
   position: relative;
   height: 70vh;
