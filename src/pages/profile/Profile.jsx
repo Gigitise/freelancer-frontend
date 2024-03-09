@@ -8,7 +8,6 @@ import { MdModeEdit, MdAdd } from "react-icons/md";
 import { timeAgo } from "../../../utils/helpers/TimeAgo";
 import Transaction from "../../components/transactions/Transaction";
 import ProfilePlaceholder from "../../components/profile-placeholder/ProfilePlaceholder";
-import getUnicodeFlagIcon from "country-flag-icons/unicode";
 import "./profile.css";
 import { ThemeContext } from "../../App";
 
@@ -86,28 +85,6 @@ const Profile = () => {
               >
                 {userProfile?.email}
               </article>
-            </div>
-          </div>
-          <div className="address">
-            <div className="address-element">
-              {userProfile?.address.country ? (
-                <>
-                  <article>{userProfile?.address.country}</article>
-                  <article>
-                    {getUnicodeFlagIcon(`${userProfile?.address.countryCode}`)}
-                  </article>
-                </>
-              ) : (
-                <span>Loading Country</span>
-              )}
-            </div>
-            <div className="address-element">
-              <span>IP Address: </span>
-              {userProfile?.address.ip ? (
-                <article>{userProfile?.address.ip}</article>
-              ) : (
-                <span>-------</span>
-              )}
             </div>
           </div>
           <div className="prof-summary grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full items-center mt-4">
