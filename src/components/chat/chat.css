@@ -1,7 +1,6 @@
 .chat {
   box-sizing: border-box;
   position: fixed;
-  background-color: var(--bg-color);
   width: 30%;
   border-radius: 8px;
   overflow: hidden;
@@ -13,6 +12,13 @@
   flex-direction: column;
   justify-content: space-between;
 }
+.light-mode .chat {
+  background-color: var(--background);
+}
+.dark-mode .chat{
+  background-color: rgb(71 85 105);
+} 
+
 .chat-header {
   background-color: var(--accent-sec-color);
   color: #fff;
@@ -21,7 +27,6 @@
   position: relative;
   padding: 0.5rem;
   height: fit-content;
-  border-bottom: solid 1px var(--secondary-color);
 }
 
 .hide-icon-chat {
@@ -67,6 +72,19 @@
   overflow-y: auto;
 }
 
+.light-mode .icon-1{
+  color: var(--bg-color);
+}
+
+.dark-mode .icon-1{
+  color: #fff;
+}
+.light-mode .holder{
+  color:var(--text-color)
+}
+.dark-mode .holder{
+  color: var(--background);
+}
 .empty-inbox {
   position: relative;
   height: 70vh;
@@ -108,7 +126,6 @@
 }
 
 .message-reply-box {
-  background-color: var(--bg-color) !important;
   position: relative;
   width: 100%;
   height: 10%;
@@ -116,6 +133,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.light-mode .message-reply-box {
+  background-color: var(--background) !important;
+}
+.dark-mode .message-reply-box {
+  background-color: var(--bg-color) !important;
 }
 
 .message-reply-box textarea {
@@ -132,9 +155,16 @@
   outline: none;
   font-size: medium;
   resize: none;
-  background-color: gray;
 }
 
+.light-mode .message-reply-box textarea {
+  border: solid 1px var(--secondary-color);
+  border-radius: 8px;
+  outline-color: var(--secondary-color);
+  font-size: var(--fontsize-normal);
+  color: var(--text-color);
+  background-color: #f7fafc;
+}
 .message-reply-box textarea::placeholder {
   color: #f7fafc;
 }
@@ -162,7 +192,6 @@
   .chat {
     box-sizing: border-box;
     position: fixed;
-    background-color: var(--bg-color);
     width: 100%;
     border-radius: 0;
     overflow: hidden;
@@ -174,6 +203,12 @@
     flex-direction: column;
     justify-content: space-between;
   }
+  .light-mode .chat {
+    background-color: var(--background);
+  }
+  .dark-mode .chat{
+    background-color: var(--bg-color);
+  } 
   .close-chat {
     display: block;
     cursor: pointer;

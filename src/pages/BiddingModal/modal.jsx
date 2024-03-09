@@ -1,4 +1,5 @@
-
+import { useContext } from "react";
+import { ThemeContext } from "../../App";
 import { cn } from "../../../utils/utilis";
 import * as Dialog from "@radix-ui/react-dialog";
 
@@ -9,19 +10,20 @@ export default function Modal({
   setShowModal,
 }) {
 
+  const { theme } = useContext(ThemeContext);
   return (
     <Dialog.Root open={showModal} onOpenChange={setShowModal}>
       <Dialog.Portal>
         <Dialog.Overlay
           // for detecting when there's an active opened modal
           id="modal-backdrop"
-          className="animate-fade-in fixed inset-0 z-40 bg-gray-700 bg-opacity-50 backdrop-blur-md"
+          className={`animate-fade-in fixed inset-0 z-40  bg-gray-100 dark:bg-gray-700 bg-opacity-50 backdrop-blur-md ${theme === "light" ? "light-mode" : "dark"}`}
         />
         <Dialog.Content
           onOpenAutoFocus={(e) => e.preventDefault()}
           onCloseAutoFocus={(e) => e.preventDefault()}
           className={cn(
-            "animate-scale-in fixed inset-0 z-40 m-auto max-h-fit w-full max-w-md overflow-hidden border border-gray-200 bg-white p-0 shadow-xl md:rounded-2xl",
+            "animate-scale-in fixed inset-0 z-40 m-auto max-h-fit w-full max-w-md overflow-hidden border border-gray-200 bg-white dark:bg-gray-700  dark:border-gray-700 p-0 shadow-xl md:rounded-2xl",
             className,
           )}
         >

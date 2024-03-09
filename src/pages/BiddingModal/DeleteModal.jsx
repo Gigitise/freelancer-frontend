@@ -1,12 +1,14 @@
 import { useParams } from "react-router-dom";
 import Modal from "./modal";
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo  ,useContext } from "react";
 import { useAuthContext } from "../../providers/AuthProvider";
 import { toast } from "react-hot-toast";
+import { ThemeContext } from "../../App";
 
 const DeleteModal = ({ showDeleteModal, setDeleteModal, setOrderContent }) => {
   const { orderId } = useParams();
   const { userToken } = useAuthContext();
+  const { theme } = useContext(ThemeContext);
   const handleCloseModal = () => {
     setDeleteModal(false);
   };
@@ -41,13 +43,13 @@ const DeleteModal = ({ showDeleteModal, setDeleteModal, setOrderContent }) => {
 
   return (
     <Modal showModal={showDeleteModal} setShowModal={setDeleteModal}>
-      <div className="fixed inset-0 z-40 min-h-full overflow-y-auto overflow-x-hidden transition flex items-center">
+      <div className={`fixed inset-0 z-40 min-h-full overflow-y-auto overflow-x-hidden transition flex items-center  ${theme === "light" ? "light-mode" : "dark"}`}>
         <div
           className="fixed inset-0 w-full h-full bg-black/50 cursor-pointer"
         ></div>
 
         <div className="relative w-full cursor-pointer pointer-events-none transition my-auto p-4 ">
-          <div className="w-full py-2 bg-gray-700 cursor-default pointer-events-auto dark:bg-gray-800 relative rounded-xl mx-auto max-w-sm">
+          <div className="w-full py-2 bg-gray-200 cursor-default pointer-events-auto dark:bg-gray-800 relative rounded-xl mx-auto max-w-sm">
             <a
               onClick={handleCloseModal}
               type="button"
@@ -56,7 +58,7 @@ const DeleteModal = ({ showDeleteModal, setDeleteModal, setOrderContent }) => {
               <svg
                 title="Close"
                 tabIndex="-1"
-                className="h-4 w-4 cursor-pointer text-gray-200"
+                className="h-4 w-4 cursor-pointer dark:text-gray-200"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
                 fill="currentColor"
@@ -72,14 +74,14 @@ const DeleteModal = ({ showDeleteModal, setDeleteModal, setOrderContent }) => {
             </a>
 
             <div className="space-y-2 p-2">
-              <div className="p-4 space-y-2 text-center text-white">
+              <div className="p-4 space-y-2 text-center dark:text-white">
                 <h2
                   className="text-xl font-bold tracking-tight"
                   id="page-action.heading"
                 >
                   Delete the created Bid
                 </h2>
-                <p className="text-gray-200">
+                <p className="dark:text-gray-200">
                   Are you sure you would like to do this?
                 </p>
               </div>

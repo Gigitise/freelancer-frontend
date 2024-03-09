@@ -8,7 +8,6 @@
   --fontsize-small: 0.9rem;
   --primary-color: #0360d1;
   --secondary-color: #374151;
-  --bg-color: #404c5e;
   --accent-sec-color: #7fc2f5;
   --complementary: #eb7100;
   --text-color: #535354;
@@ -31,14 +30,23 @@
   font-size: var(--fontsize-normal);
   color: var(--text-color);
   letter-spacing: 0.2px;
+  --bg-color-light: aliceblue; 
+  --bg-color-dark: #333333; 
 }
 
 body {
   padding: 0;
   margin: 0;
-  background-color: var(--secondary-color);
+  background-color: var(--bg-color-light); /* Set the background color for light mode */
 }
 
+.light-mode body {
+  background-color: var(--bg-color-light); /* Set the background color for light mode */
+}
+
+.dark-mode body {
+  background-color: var(--bg-color-dark); /* Set the background color for dark mode */
+}
 
 h1 {
   margin: 0;
@@ -46,6 +54,7 @@ h1 {
 }
 
 /* Skeleton animation */
+
 
 @keyframes skeleton-loading {
   0% {
@@ -56,6 +65,7 @@ h1 {
     background-color: #727d8d;
   }
 }
+
 
 /* overlay */
 

@@ -16,7 +16,11 @@ const FreelancerDashboard = () => {
   return (
     loading ?
     <LoadingSkeletonOrder />: 
-    <div className={`dashboard ${theme === "light" ? "light-mode" : "dark-mode"}`}> 
+    <div className={`dashboard ${theme === "light" ? "light-mode" : "dark-mode"}`}
+    style={{
+  backgroundColor: theme === "dark" ? "#404c5e" : "",      
+      }}
+    > 
         {                           
             (orders?.length > 0)?
             orders?.map((order, index)=>{

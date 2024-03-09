@@ -1,9 +1,8 @@
 /* Update styles to use a specific class or ID for the Login component */
 .login-container {
   margin: 2;
-  width: 100dvw;
-  height: 100dvh;
-  background: #ecf0f3;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   align-items: center;
   text-align: center;
@@ -11,6 +10,13 @@
   place-items: center;
   overflow: hidden;
   font-family: poppins;
+}
+.light-mode .login-container {
+  background: #ecf0f3;
+}
+
+.dark-mode .login-container {
+  background: var(--secondary-color);
 }
 
 .login-container .btn {
@@ -20,9 +26,16 @@
   border-radius: 20px;
   padding: 40px;
   box-sizing: border-box;
-  background-color: var(--bg-color);
-  
 }
+
+.light-mode .login-container .btn {
+  background: #ecf0f3;
+  box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+}
+.dark-mode .login-container .btn {
+  background: var(--bg-color);
+}
+
 
 .brand-logo {
   height: 100px;
@@ -36,7 +49,7 @@
   margin-top: 10px;
   font-weight: 900;
   font-size: 1.8rem;
-  color: #1da1f2;
+  color: #1DA1F2;
   letter-spacing: 1px;
 }
 
@@ -45,9 +58,7 @@
   margin-top: 30px;
 }
 
-label,
-input,
-button {
+label, input, button {
   display: block;
   width: 100%;
   border: none;
@@ -68,36 +79,44 @@ label:nth-of-type(2) {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  
 }
 
 input::placeholder {
-  color: #ffff;
+  color: gray;
 }
 
+
+
 .login-content {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
 }
 
 .username-icon,
 .password-icon {
-  margin-right: 10px;
-  color: #1a1a1a;
+    margin-right: 10px; 
+    color: #1a1a1a;
+}
+.dark-mode
+.password-icon { 
+    color: #fff;
+}
+.dark-mode  .username-icon{
+  color:#fff
 }
 
 .password-input {
-  display: flex;
-  align-items: center;
-  position: relative;
+    display: flex;
+    align-items: center;
+    position: relative;
 }
 
 .password-icon-eye {
-  position: absolute;
-  right: 50px;
-  cursor: pointer;
-  color: gray;
+    position: absolute;
+    right: 50px;
+    cursor: pointer;
+    color: gray; 
 }
 
 input {
@@ -108,26 +127,29 @@ input {
   display: flex;
   flex-direction: column;
   align-items: center;
+
 }
 
 .Sign {
   border-radius: 8px;
   border: 1px solid transparent;
-  border-color: var(--accent-sec-color);
   padding-top: 10px;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  text-align: center;
+  background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  color: rgb(15, 11, 11);
   margin-top: 20px;
-  color: #ffff;
-  background: #1da1f2;
+  background: #1DA1F2;
   height: 40px;
   transition: 0.5s;
 }
 
+.Sign:hover {
+  border-color: #646cff;
+}
 .register-prompt {
   display: flex;
   flex-direction: column;
@@ -137,13 +159,88 @@ input {
 }
 
 .register-prompt span a, .reset-password a{
-  color: var(--background);
+  color: var(--secondary-color);
   text-decoration: underline;
   cursor: pointer;
   text-decoration: none;
 }
 
-.register-prompt span a:hover,
-.reset-password a:hover {
+.register-prompt span a:hover, .reset-password a:hover {
+  text-decoration: underline;
+}
+
+
+.light-mode body {
+  background-color: var(--background);
+  color: var(--text-color);
+}
+.light-mode body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.light-mode .btn {
+  background-color: rgb(203 213 225);
+  color: white;
+}
+
+
+.light-mode .login-container {
+  background-color: var(--background);
+}
+
+.light-mode .register-prompt span a,
+.light-mode .reset-password a {
+  color: var(--primary-color);
+}
+
+.light-mode .register-prompt span a:hover,
+.light-mode .reset-password a:hover {
+  text-decoration: underline;
+}
+
+.light-mode input {
+  background-color: #ffffff;
+  color: #1a1a1a;
+}
+
+.light-mode .Sign {
+  background-color: #1DA1F2;
+  color: #ffffff;
+}
+
+.dark-mode input {
+  background-color: #2d2d2d;
+  color: #ffffff;
+}
+
+.dark-mode .Sign {
+  background-color: #1DA1F2;
+  color: #ffffff;
+}
+
+
+.dark-mode body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.dark-mode .btn {
+  background-color: var(--bg-color);
+  color: white;
+}
+
+
+.dark-mode .login-container {
+  background-color: var(--bg-color);
+}
+
+.dark-mode .register-prompt span a,
+.dark-mode .reset-password a {
+  color: var(--accent-sec-color);
+}
+
+.dark-mode .register-prompt span a:hover,
+.dark-mode .reset-password a:hover {
   text-decoration: underline;
 }

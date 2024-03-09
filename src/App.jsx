@@ -23,7 +23,7 @@ import BidDetails from "./pages/orders/Bid-view/BidDetails";
 export const ThemeContext = createContext(null);
 
 function App() {
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState("light");
   const { userToken } = useAuthContext();
 
   const toggleTheme = () => {

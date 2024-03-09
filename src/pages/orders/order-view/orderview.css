@@ -3,6 +3,14 @@
   position: relative;
   padding: 0 1rem;
   display: flex;
+  
+}
+
+.light-mode .order-details {
+  color: #535354;
+}
+
+.dark-mode .order-details {
   color: #fff;
 }
 
@@ -19,10 +27,17 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  border: solid 1px var(--secondary-color);
   padding: 0.5rem;
-  background-color: var(--bg-color);
   border-radius: 4px;
+}
+
+.light-mode .rating{
+  border: solid 1px var(--secondary-);
+  background-color: gray;
+}
+.dark-mode .rating{
+  border: solid 1px var(--secondary-color);
+  background-color: rgb(71 85 105);
 }
 
 .order-details strong {
@@ -39,12 +54,40 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  background-color: var(--bg-color);
   border-radius: 4px;
 }
 
+.light-mode,
+.instruction {
+  background-color: #fff;
+}
+.dark-mode 
+.instructions {
+  background-color: rgb(71 85 105);
+}
+
+.dark-mode .attachments{
+  background-color: rgb(71 85 105);
+}
+
+.light-mode .text {
+color:#535354;
+}
+
+.dark-mode .text{
+  color: #fff;
+}
+
+
 .solutions {
   display: flex;
+}
+
+.light-mode .order-soln{
+  background-color: rgb(226 232 240);
+}
+.dark-mode .order-soln{
+  background-color: rgb(71 85 105);
 }
 
 .order-elements,
@@ -79,6 +122,14 @@
   gap: 1rem;
 }
 
+.light-mode .prof-disp-icon {
+  color:#535354;
+}
+
+.dark-mode .prof-disp-icon {
+  color: #fff;
+}
+
 .order-soln div div {
   position: inherit;
   gap: 4rem;
@@ -102,14 +153,13 @@ textarea {
   font-family: inherit;
   font-size: inherit;
   line-height: 1.6;
-  background-color: var(--bg-color);
+  background-color: var(--background);
   color: #fff;
 }
 
 .solution-details {
   display: flex;
   gap: 4rem;
-  position: inherit;
   position: inherit;
   width: 30%;
   padding: 1rem;
@@ -160,7 +210,6 @@ textarea {
 }
 
 .upload-div article {
-  border: solid 1px #fff;
   border-radius: 8px;
   padding: 1rem;
   border-style: dashed;
@@ -169,7 +218,19 @@ textarea {
   justify-content: center;
   align-items: center;
   gap: 1rem;
+
+}
+
+.light-mode  .upload-div article {
+  color: #535354;
+  border: solid 1px #535354;
+  border-style: dashed;
+}
+
+.dark-mode .upload-div article {
   color: #fff;
+  border: solid 1px #fff;
+  border-style: dashed;
 }
 
 /* Loading Animations */

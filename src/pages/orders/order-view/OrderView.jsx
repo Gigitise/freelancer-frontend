@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./orderview.css";
 import { IoMdDownload } from "react-icons/io";
 import { RiDeleteBin6Line } from "react-icons/ri";
@@ -23,6 +23,7 @@ import { useSolutionModal } from "../../BiddingModal/SolutionModal";
 import { toast } from "react-hot-toast";
 import RatingOrderView from "../../../components/rating/order-review/RatingOrderView";
 import { IoPersonSharp } from "react-icons/io5";
+import { ThemeContext } from "../../../App";
 
 const FloatingButton = ({ onClick }) => {
   return (
@@ -36,6 +37,7 @@ const OrderView = () => {
   const ordersUrl = `${import.meta.env.VITE_API_URL}/orders/`;
 
   const { userToken, loadedUserProfile } = useAuthContext();
+  const { theme } = useContext(ThemeContext);
 
   const navigate = useNavigate();
 
@@ -152,7 +154,8 @@ const OrderView = () => {
   };
 
   return (
-    <div className="order-view">
+    <div className={`order-view ${theme === "light" ? "light-mode" : "dark-mode"} ${theme === "light" ? "light-mode" : "dark"}`}
+    style={{ Color: theme === "light" ? "#535354" : "" }}>
       {orderContent?.status === "Available" && (
         <>
           <BiddingModal />
@@ -279,7 +282,7 @@ const OrderView = () => {
 
               {(orderContent.status === "Completed" ||
                 orderContent.status === "In Progress") && (
-                <div className="order-soln">
+                <div className="order-soln ">
                   {orderContent?.solution && loadingAttachemnt ? (
                     <div className="animate-pulse"></div>
                   ) : (
@@ -292,7 +295,7 @@ const OrderView = () => {
                             <input
                               onChange={uploadAttachmentFile}
                               ref={fileInputRef}
-                              className="hidden"
+                              className="hidden "
                               size={20 * 1024 * 1024}
                               type="file"
                               name=""
@@ -351,13 +354,13 @@ const OrderView = () => {
                     )}
 
                   {orderContent?.solution && (
-                    <div className="flex items-center space-x-11 md:space-x-[69px]  h-[64px]">
+                    <div className="flex items-center space-x-11 md:space-x-[69px]   h-[64px]">
                       <a
                         href={orderContent?.solution?.solution}
                         id="solution-file"
                         rel="noopener noreferrer"
                         download
-                        className="block rounded-lg p-4 shadow-sm bg-accent w-[100px] md:max-w-[200px] lg:w-full truncate"
+                        className="block  p-4  w-[100px] md:max-w-[200px] lg:w-full truncate"
                       >
                         {typeof orderContent?.solution?.solution === "string"
                           ? orderContent?.solution?.solution.substring(
@@ -382,18 +385,21 @@ const OrderView = () => {
                           </div>
                         </dl>
                       </div>
-                      <RiDeleteBin6Line
-                        onClick={() => setShowSolutionModal(true)}
-                        className="cursor-pointer text-white h-7 w-7 "
-                        size={64}
-                      />
-                      <span className="text-white">{uploadedAt}</span>
+                      {orderContent?.status === "In Progress" && (
+                         <RiDeleteBin6Line
+                         onClick={() => setShowSolutionModal(true)}
+                         className="cursor-pointer dark:text-white h-7 w-7 "
+                         size={64}
+                       />
+                  )}
+                      
+                      <span className="dark:text-white">{uploadedAt}</span>
                     </div>
                   )}
                 </div>
               )}
-              <div className="instructions">
-                <strong className="text-white">
+              <div className="instructions bg-slate-200">
+                <strong className="text">
                   {orderContent?.status === "In Progress" ||
                   orderContent?.status === "Available"
                     ? orderContent?.instructions
@@ -411,12 +417,12 @@ const OrderView = () => {
               </div>
               {orderContent?.status === "Completed" &&
               !orderContent?.attachment ? null : (
-                <div className="attachments">
+                <div className="attachments bg-slate-200">
                   {orderContent?.attachment && loadingAttachemnt ? (
                     <div style={{ height: "1.5rem" }}></div>
                   ) : (
                     <strong style={{ height: "1.5rem" }}>
-                      <p className="text-white">
+                      <p className="text">
                         {" "}
                         {orderContent?.attachment
                           ? "Attachments"

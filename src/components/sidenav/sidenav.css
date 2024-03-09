@@ -29,7 +29,6 @@
 .nav-item {
   border: none;
   border-radius: 2rem;
-  border: solid var(--secondary-color) 1px;
   transition: background-color 0.3s;
   text-align: start;
   border-radius: 2px;
@@ -46,11 +45,6 @@
   display: none;
 }
 
-/* Light mode specific styles */
-.light-mode,
-.side-nav {
-  border-right: solid 1px #fff;
-}
 
 .light-mode .heading-logo {
   color: #ffff;
@@ -65,6 +59,10 @@
   background-color: #7fc2f5;
   display: flex;
   background-color: #374151;
+}
+.dark-mode .nav-item:hover{
+  border: solid var(--background) 1px;
+
 }
 
 /* Dark mode specific styles */
@@ -101,13 +99,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--bg-color);
   border-radius: 50%;
   width: 1rem;
   height: 1rem;
   box-sizing: border-box;
   padding: 1rem;
   transition: background-color 0.3s;
+}
+
+.light-mode .nav-item .count {
+  background-color: var(--background);
+  color:var(--accent-sec-color)
+}
+
+.dark-mode .nav-item .count {
+  background-color: var(--bg-color);
 }
 
 .nav-item:hover > .count {

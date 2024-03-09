@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState ,useContext} from "react";
 import "./chat.css";
 import { IoSend, IoCloseOutline } from "react-icons/io5"; // Import IoCloseOutline
 import { IoChatbubblesSharp } from "react-icons/io5";
@@ -6,9 +6,11 @@ import { useChatContext } from "../../providers/ChatProvider";
 import { useAuthContext } from "../../providers/AuthProvider";
 import { timeFormater } from "../../../utils/helpers/TimeFormater";
 import { Link } from "react-router-dom";
+import { ThemeContext } from "../../App";
 
 const Chat = ({ orderId, client, freelancer, isChatOpen, toggleChat }) => {
   const { loadedUserProfile } = useAuthContext();
+  const { theme } = useContext(ThemeContext);
   const iconSize = 25;
   const { loadingChats, chats, getChats, sendChat, socket, typingData } =
     useChatContext();
@@ -64,7 +66,7 @@ const Chat = ({ orderId, client, freelancer, isChatOpen, toggleChat }) => {
   }, [orderId, loadedUserProfile]);
 
   return (
-    <div className={`chat ${isChatOpen ? "show" : ""}`}>
+    <div className={`chat ${isChatOpen ? "show" : ""} ${theme === "light" ? "light-mode" : "dark-mode"}`}>
       <div className="chat-header">
         <Link to={`../client-profile/${getReceiver()}`}
               className="receiver-profile">
@@ -108,8 +110,8 @@ const Chat = ({ orderId, client, freelancer, isChatOpen, toggleChat }) => {
         </div>
       ) : (
         <div className="empty-inbox">
-          <IoChatbubblesSharp color="#fff" size={50} />
-          <article>Start chat</article>
+          <IoChatbubblesSharp className="icon-1" size={50} />
+          <article className="holder">Start chat</article>
         </div>
       )}
       <form className="message-reply-box" onSubmit={submitMessage}>
