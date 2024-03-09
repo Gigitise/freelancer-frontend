@@ -5,10 +5,10 @@ import { IoChatbubblesSharp } from "react-icons/io5";
 import { useChatContext } from "../../providers/ChatProvider";
 import { useAuthContext } from "../../providers/AuthProvider";
 import { timeFormater } from "../../../utils/helpers/TimeFormater";
-import { Link } from "react-router-dom";
+import PulseLoader from "react-spinners/PulseLoader";
 
 const Chat = ({ orderId, client, freelancer, isChatOpen, toggleChat }) => {
-  const { loadedUserProfile } = useAuthContext();
+  const { loadedUserProfile, loadingUserProfile } = useAuthContext();
   const iconSize = 25;
   const { loadingChats, chats, getChats, sendChat, socket, typingData } =
     useChatContext();
@@ -66,8 +66,7 @@ const Chat = ({ orderId, client, freelancer, isChatOpen, toggleChat }) => {
   return (
     <div className={`chat ${isChatOpen ? "show" : ""}`}>
       <div className="chat-header">
-        <Link to={`../client-profile/${getReceiver()}`}
-              className="receiver-profile">
+        <div className="receiver-profile">
           <article className="img-chat">{`${
             getReceiver()?.charAt(0)?.toUpperCase() +
             getReceiver()?.slice(1).slice(0, 1)
@@ -81,10 +80,16 @@ const Chat = ({ orderId, client, freelancer, isChatOpen, toggleChat }) => {
             <article>{getReceiver()}</article>
             {typing && <span>Typing...</span>}
           </div>
-        </Link>
+        </div>
         <IoCloseOutline className="close-chat" onClick={toggleChat} size={24} />
       </div>
-      {chats.list?.length > 0 ? (
+      {loadingChats || loadingUserProfile ? (
+        <div>
+          <span className="chat-loader">
+            <PulseLoader color="#7fc2f5" />
+          </span>
+        </div>
+      ) : chats.list?.length > 0 ? (
         <div className="messages-box" id="msg" ref={chatBoxRef}>
           {chats.list?.map((msg, index) => {
             return (
@@ -108,15 +113,14 @@ const Chat = ({ orderId, client, freelancer, isChatOpen, toggleChat }) => {
         </div>
       ) : (
         <div className="empty-inbox">
-          <IoChatbubblesSharp color="#fff" size={50} />
-          <article>Start chat</article>
+          <IoChatbubblesSharp className="icon-1" size={50} />
+          <article className="holder">Start chat</article>
         </div>
       )}
       <form className="message-reply-box" onSubmit={submitMessage}>
-        <input
+        <textarea
           required
           type="text"
-          className="bg-gray-500 text-white"
           value={msg}
           ref={messageRef}
           onChange={checkMsg}
@@ -127,6 +131,7 @@ const Chat = ({ orderId, client, freelancer, isChatOpen, toggleChat }) => {
           size={25}
           type="submit"
           className={msg ? "submit-message active" : "submit-message inactive"}
+          onClick={submitMessage}
         />
       </form>
     </div>

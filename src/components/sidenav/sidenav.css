@@ -122,10 +122,9 @@
 }
 
 .dark-mode .nav-item:hover {
-  background-color: var(--secondary-color);
+  background-color: var(--bg-color);
   color: #fff;
   display: flex;
-  border: solid 1px #fff;
 }
 
 
