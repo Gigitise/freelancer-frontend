@@ -133,6 +133,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 0.5rem;
 }
 .light-mode .message-reply-box {
   background-color: var(--background) !important;
@@ -155,6 +156,7 @@
   outline: none;
   font-size: medium;
   resize: none;
+  background-color: #e6e6e6;
 }
 
 .light-mode .message-reply-box textarea {
@@ -166,7 +168,7 @@
   background-color: #f7fafc;
 }
 .message-reply-box textarea::placeholder {
-  color: #f7fafc;
+  color: var(--text-color);
 }
 
 .submit-message {
@@ -186,6 +188,12 @@
 
 .close-chat {
   display: none;
+}
+
+.chat-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media screen and (max-width: 900px) {

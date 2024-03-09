@@ -3,9 +3,11 @@ import OrderComponent from "../../../components/order-component/OrderComponent";
 import { useOrderContext } from "../../../providers/OrderProvider";
 import LoadingSkeletonOrder from "../../loading/Loading";
 import ViewMore from "../../../components/more/ScrollMore";
+import { useEffect } from "react";
 
 const Available = () => {
   const { getAvailable, loadingAvailable, ordersAvailable } = useOrderContext();
+
   return loadingAvailable ? (
     <LoadingSkeletonOrder />
   ) : ordersAvailable.orders.length > 0 ? (

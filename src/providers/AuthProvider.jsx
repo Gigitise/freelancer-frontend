@@ -229,6 +229,7 @@ export const AuthProvider = (props) => {
 
     userToken && getUserProfile();
   }, [userToken]);
+
   return (
     <AuthContext.Provider
       value={{
