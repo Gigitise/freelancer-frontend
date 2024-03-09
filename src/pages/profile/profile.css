@@ -81,8 +81,8 @@
   border: solid 1px var(--secondary-color);
   border-radius: 4px;
   transition: border 3s;
+  max-width: 900px;
 }
-
 
 .bio textarea {
   background-color: var(--bg-color) !important;
@@ -95,6 +95,31 @@
 
 .bio:hover {
   border: dashed 1px #fff;
+}
+
+.bio-v {
+  border: none;
+  max-width: 900px;
+}
+
+.bio-v:hover {
+  border: none;
+}
+
+.prof-summary {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: 1rem;
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  align-items: center;
+}
+
+.prof-summary div {
+  display: flex;
+  justify-content: space-between;
 }
 
 .prof-element {
