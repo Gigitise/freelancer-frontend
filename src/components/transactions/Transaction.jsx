@@ -52,6 +52,7 @@ const Transaction = ({ user, userToken }) => {
         </div>
       ) : (
         <div className={`transactions ${theme === "light" ? "light-mode" : "dark-mode"}`}>
+          <h1>Transaction History</h1>
           <table className="transaction-table">
             <thead>
               <tr>

@@ -4,7 +4,8 @@
 }
 
 .settings-personal {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
   gap: 2rem;
 }
 
@@ -23,7 +24,7 @@
   background-color: rgb(203 213 225);
 }
 
-.light-mode .feature-2{
+.light-mode .feature-2 {
   color: var(--text-color);
   background-color: rgb(203 213 225);
 }
@@ -41,7 +42,7 @@
   font-weight: 700;
 }
 
-.light-mode .pref-title{
+.light-mode .pref-title {
   color: var(--text-color);
 }
 .notifications-settings {
@@ -106,8 +107,6 @@
   left: 2px;
 }
 
-
-
 .pref {
   position: inherit;
   display: flex;
@@ -125,8 +124,6 @@
   background-color: var(--bg-color);
   border: solid 2px var(--bg-color);
 }
-
-
 
 .pref strong {
   font-weight: 700;
@@ -147,7 +144,6 @@
   color: #fff;
 }
 
-
 .pref div {
   display: flex;
   justify-content: space-between;
@@ -165,5 +161,17 @@
   }
   .pref {
     width: 100%;
+  }
+
+  @media screen and (max-width: 900px) {
+    .settings-personal {
+      gap: 1rem;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .settings-personal {
+      gap: 0.5rem;
+    }
   }
 }

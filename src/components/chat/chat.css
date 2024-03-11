@@ -29,6 +29,12 @@
   height: fit-content;
 }
 
+.chat-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .hide-icon-chat {
   display: flex;
   align-content: center;
@@ -133,6 +139,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-bottom: 2rem;
 }
 .light-mode .message-reply-box {
   background-color: var(--background) !important;
@@ -155,6 +162,8 @@
   outline: none;
   font-size: medium;
   resize: none;
+  background-color: #e6e6e6;
+
 }
 
 .light-mode .message-reply-box textarea {
@@ -166,7 +175,7 @@
   background-color: #f7fafc;
 }
 .message-reply-box textarea::placeholder {
-  color: #f7fafc;
+  color: var(--text-color);
 }
 
 .submit-message {

@@ -87,7 +87,7 @@ const Profile = () => {
               </article>
             </div>
           </div>
-          <div className="prof-summary grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full items-center mt-4">
+          <div className="prof-summary  w-full items-center mt-4">
             <div className="prof-element justify-between p-4 border border-sky-300 flex items-center w-full dark:text-gray-600">
               <div className="flex items-center gap-2">
                 <MdTaskAlt className="text-sky-300" size={iconSize} />
@@ -107,7 +107,7 @@ const Profile = () => {
                 <MdOutlineAddTask className="text-sky-300" size={iconSize} />
                 <article className="dark:text-white">Orders completed</article>
               </div>
-              <span className="">{ordersCompleted?.length}</span>
+              <span className="">{ordersCompleted.orders.length}</span>
             </div>
             <div className="prof-element justify-between p-4 border border-sky-300 flex items-center w-full dark:text-gray-600">
               <div className="flex items-center gap-2">

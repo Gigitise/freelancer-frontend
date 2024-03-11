@@ -98,7 +98,9 @@ const ClientProfile = () => {
             <div className="address-element">
               {clientData?.address.country ? (
                 <div className="flex mr-10">
-                  <article className="mr-10">{clientData?.address.country}</article>
+                  <article className="mr-10">
+                    {clientData?.address.country}
+                  </article>
                   <article>
                     {getUnicodeFlagIcon(`${clientData?.address.countryCode}`)}
                   </article>
@@ -136,7 +138,7 @@ const ClientProfile = () => {
             </div>
           </div>
           <div className="mt-5 flex flex-col space-y-2 mb-4">
-            <div className="bio">
+            <div className="bio bio-v">
               <strong>Bio</strong>
               <article>{clientData?.bio}</article>
             </div>

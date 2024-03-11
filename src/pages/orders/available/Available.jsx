@@ -3,6 +3,7 @@ import OrderComponent from "../../../components/order-component/OrderComponent";
 import { useOrderContext } from "../../../providers/OrderProvider";
 import LoadingSkeletonOrder from "../../loading/Loading";
 import ViewMore from "../../../components/more/ScrollMore";
+import OrderPlaceholder from "../../../components/order-placeholder/OrderPlaceholder";
 
 const Available = () => {
   const { getAvailable, loadingAvailable, ordersAvailable } = useOrderContext();
@@ -18,11 +19,7 @@ const Available = () => {
       {ordersAvailable.next && <ViewMore fetch={getAvailable} />}
     </>
   ) : (
-    <div className="create-task-div">
-      <div className="child">
-        <article>There are no available orders!</article>
-      </div>
-    </div>
+    <OrderPlaceholder message="No orders available" />
   );
 
   // </div>

@@ -80,14 +80,14 @@ const OrderView = () => {
     if (attachment) {
       if (attachment.size <= 20 * 1024 * 1024) {
         uploadAttachment(attachment, orderId, solutionType).then((res) => {
-          const attachmentUrl = res?.solution;
+          console.log(res);
 
           const updatedOrder = {
             ...orderContent,
-            solution: attachmentUrl,
+            solution: res,
           };
 
-          orderContent.solution = attachmentUrl;
+          orderContent.solution = res;
 
           setOrderContent(updatedOrder);
         });
@@ -354,6 +354,7 @@ const OrderView = () => {
                     )}
 
                   {orderContent?.solution && (
+<<<<<<< HEAD
                     <div className="flex items-center space-x-11 md:space-x-[69px]   h-[64px]">
                       <a
                         href={orderContent?.solution?.solution}
@@ -372,19 +373,52 @@ const OrderView = () => {
                       </a>
                       <div className="mt-2">
                         <dl>
+=======
+                    <div className="solution-uploaded flex ">
+                      <div className="file">
+                        <a
+                          href={orderContent?.solution?.solution}
+                          id="solution-file"
+                          rel="noopener noreferrer"
+                          download
+                          className="block rounded-lg p-3 shadow-sm bg-accent w-[100px] md:max-w-[200px] lg:w-full truncate"
+                        >
+                          {typeof orderContent?.solution?.solution === "string"
+                            ? orderContent?.solution?.solution.substring(
+                                orderContent?.solution?.solution.lastIndexOf(
+                                  "/"
+                                ) + 1
+                              )
+                            : ""}
+                        </a>
+                        <div>
+                          <dl>
+                            <div>
+                              <dd
+                                className={`text-[14px] ${
+                                  orderContent?.solution._type === "Final"
+                                    ? "text-green-500"
+                                    : "text-orange-500"
+                                }`}
+                              >
+                                {orderContent?.solution?._type}
+                              </dd>
+                            </div>
+                          </dl>
+                        </div>
+                        {orderContent?.status === "In Progress" && (
+>>>>>>> main
                           <div>
-                            <dd
-                              className={`text-[14px] ${
-                                solutionType === "Draft"
-                                  ? "text-green-500"
-                                  : "text-orange-500"
-                              }`}
-                            >
-                              {orderContent?.solution?._type}
-                            </dd>
+                            <RiDeleteBin6Line
+                              onClick={() => setShowSolutionModal(true)}
+                              className="cursor-pointer text-white h-7 w-7 "
+                              size={64}
+                            />
                           </div>
-                        </dl>
+                        )}
+                        <span className="text-white">{uploadedAt}</span>
                       </div>
+<<<<<<< HEAD
                       {orderContent?.status === "In Progress" && (
                          <RiDeleteBin6Line
                          onClick={() => setShowSolutionModal(true)}
@@ -394,6 +428,8 @@ const OrderView = () => {
                   )}
                       
                       <span className="dark:text-white">{uploadedAt}</span>
+=======
+>>>>>>> main
                     </div>
                   )}
                 </div>

@@ -1,9 +1,16 @@
 /* Skeleton anime */
 
+.anim-box {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
+  gap: 2rem;
+  padding: 0.5rem;
+}
+
 .skeleton-box {
   opacity: 0.7;
   width: 100%;
-  aspect-ratio: 3;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;

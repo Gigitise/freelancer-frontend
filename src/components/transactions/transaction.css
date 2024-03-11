@@ -1,3 +1,9 @@
+.transactions h1 {
+  font-weight: bold;
+  margin: 1rem 0;
+  color: #fff;
+}
+
 .transaction-table {
   position: inherit;
   width: 100%;
@@ -6,6 +12,7 @@
   border-radius: 4px;
   overflow: hidden;
   color: #fff;
+  max-width: 900px;
 }
 
 thead {
@@ -26,7 +33,7 @@ td {
   padding: 0.5rem 0;
 }
 
-.dark-mode tr:nth-of-type(even) {
+tbody tr:nth-of-type(odd) {
   background-color: var(--bg-color);
 }
 .light-mode tr:nth-of-type(even) {

@@ -26,6 +26,7 @@
   border-radius: 20px;
   padding: 40px;
   box-sizing: border-box;
+  background-color: var(--bg-color);
 }
 
 .light-mode .login-container .btn {
@@ -93,17 +94,15 @@ input::placeholder {
     margin-bottom: 15px;
 }
 
+.login-content input {
+  padding: 0 0.5rem;
+  color: #fff;
+}
+
 .username-icon,
 .password-icon {
-    margin-right: 10px; 
-    color: #1a1a1a;
-}
-.dark-mode
-.password-icon { 
-    color: #fff;
-}
-.dark-mode  .username-icon{
-  color:#fff
+  margin-right: 10px;
+  color: #fff;
 }
 
 .password-input {
@@ -113,10 +112,10 @@ input::placeholder {
 }
 
 .password-icon-eye {
-    position: absolute;
-    right: 50px;
-    cursor: pointer;
-    color: gray; 
+  position: absolute;
+  right: 50px;
+  cursor: pointer;
+  color: #fff;
 }
 
 input {
@@ -133,7 +132,7 @@ input {
 .Sign {
   border-radius: 8px;
   border: 1px solid transparent;
-  padding-top: 10px;
+  border-color: var(--accent-sec-color);
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
@@ -158,8 +157,9 @@ input {
   padding-top: 20px;
 }
 
-.register-prompt span a, .reset-password a{
-  color: var(--secondary-color);
+.register-prompt span a,
+.reset-password a {
+  color: var(--background);
   text-decoration: underline;
   cursor: pointer;
   text-decoration: none;
