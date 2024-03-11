@@ -354,26 +354,6 @@ const OrderView = () => {
                     )}
 
                   {orderContent?.solution && (
-<<<<<<< HEAD
-                    <div className="flex items-center space-x-11 md:space-x-[69px]   h-[64px]">
-                      <a
-                        href={orderContent?.solution?.solution}
-                        id="solution-file"
-                        rel="noopener noreferrer"
-                        download
-                        className="block  p-4  w-[100px] md:max-w-[200px] lg:w-full truncate"
-                      >
-                        {typeof orderContent?.solution?.solution === "string"
-                          ? orderContent?.solution?.solution.substring(
-                              orderContent?.solution?.solution.lastIndexOf(
-                                "/"
-                              ) + 1
-                            )
-                          : ""}
-                      </a>
-                      <div className="mt-2">
-                        <dl>
-=======
                     <div className="solution-uploaded flex ">
                       <div className="file">
                         <a
@@ -407,7 +387,6 @@ const OrderView = () => {
                           </dl>
                         </div>
                         {orderContent?.status === "In Progress" && (
->>>>>>> main
                           <div>
                             <RiDeleteBin6Line
                               onClick={() => setShowSolutionModal(true)}
@@ -418,18 +397,6 @@ const OrderView = () => {
                         )}
                         <span className="text-white">{uploadedAt}</span>
                       </div>
-<<<<<<< HEAD
-                      {orderContent?.status === "In Progress" && (
-                         <RiDeleteBin6Line
-                         onClick={() => setShowSolutionModal(true)}
-                         className="cursor-pointer dark:text-white h-7 w-7 "
-                         size={64}
-                       />
-                  )}
-                      
-                      <span className="dark:text-white">{uploadedAt}</span>
-=======
->>>>>>> main
                     </div>
                   )}
                 </div>
