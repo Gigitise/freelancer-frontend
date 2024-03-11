@@ -24,6 +24,8 @@
   height: 80dvh;
   color: #fff;
   overflow: hidden !important;
+  width: 80dvw !important;
+  position: relative;
 }
 
 .create-task-div .child {
@@ -48,14 +50,8 @@
   color: #fff;
 }
 
-@media screen and (min-width: 900px) {
-  .create-task-div {
-    width: 80%;
-  }
-}
-
 @media screen and (max-width: 900px) {
   .create-task-div {
-    width: 100dvw;
+    width: 100dvw !important;
   }
 }

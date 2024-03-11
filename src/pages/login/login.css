@@ -21,7 +21,6 @@
   padding: 40px;
   box-sizing: border-box;
   background-color: var(--bg-color);
-  
 }
 
 .brand-logo {
@@ -68,7 +67,6 @@ label:nth-of-type(2) {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  
 }
 
 input::placeholder {
@@ -81,10 +79,15 @@ input::placeholder {
   margin-bottom: 15px;
 }
 
+.login-content input {
+  padding: 0 0.5rem;
+  color: #fff;
+}
+
 .username-icon,
 .password-icon {
   margin-right: 10px;
-  color: #1a1a1a;
+  color: #fff;
 }
 
 .password-input {
@@ -97,7 +100,7 @@ input::placeholder {
   position: absolute;
   right: 50px;
   cursor: pointer;
-  color: gray;
+  color: #fff;
 }
 
 input {
@@ -114,7 +117,6 @@ input {
   border-radius: 8px;
   border: 1px solid transparent;
   border-color: var(--accent-sec-color);
-  padding-top: 10px;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
@@ -136,7 +138,8 @@ input {
   padding-top: 20px;
 }
 
-.register-prompt span a, .reset-password a{
+.register-prompt span a,
+.reset-password a {
   color: var(--background);
   text-decoration: underline;
   cursor: pointer;

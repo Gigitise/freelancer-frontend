@@ -40,6 +40,7 @@
   gap: 1rem;
   cursor: pointer;
   transition: box-shadow 0.2s ease-in-out;
+  background-color: var(--bg-color) !important;
 }
 
 .light-mode .order-content {
@@ -47,10 +48,6 @@
   color: #fff;
 }
 
-.dark-mode .order-content {
-  background-color: var(--bg-color);
-  color: #fff;
-}
 
 .order-content .title-box {
   text-align: start;

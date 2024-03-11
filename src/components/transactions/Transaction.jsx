@@ -50,6 +50,7 @@ const Transaction = ({ user, userToken }) => {
         </div>
       ) : (
         <div className="transactions">
+          <h1>Transaction History</h1>
           <table className="transaction-table">
             <thead>
               <tr>

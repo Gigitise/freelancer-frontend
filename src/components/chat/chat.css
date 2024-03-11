@@ -24,6 +24,12 @@
   border-bottom: solid 1px var(--secondary-color);
 }
 
+.chat-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .hide-icon-chat {
   display: flex;
   align-content: center;
@@ -116,6 +122,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-bottom: 2rem;
 }
 
 .message-reply-box textarea {
@@ -132,11 +139,12 @@
   outline: none;
   font-size: medium;
   resize: none;
-  background-color: gray;
+  background-color: #e6e6e6;
+
 }
 
 .message-reply-box textarea::placeholder {
-  color: #f7fafc;
+  color: var(--text-color);
 }
 
 .submit-message {
