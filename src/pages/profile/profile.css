@@ -7,14 +7,19 @@
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
   border-radius: 50%;
   justify-content: center;
   width: 4rem;
   height: 4rem;
+  background-color: var(--accent-sec-color);
 }
 
 .prof-img,
 .img-placeholder-profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   line-height: 4rem;
   color: #fff;
@@ -81,7 +86,6 @@
   border: solid 1px var(--secondary-color);
   border-radius: 4px;
   transition: border 3s;
-  max-width: 900px;
 }
 
 .bio textarea {
@@ -97,29 +101,17 @@
   border: dashed 1px #fff;
 }
 
-.bio-v {
-  border: none;
-  max-width: 900px;
-}
-
-.bio-v:hover {
-  border: none;
-}
-
-.prof-summary {
-  box-sizing: border-box;
+.address {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-  gap: 1rem;
-  position: relative;
-  width: 100%;
-  max-width: 900px;
-  align-items: center;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  color: #fff;
+  margin: 2rem 0;
 }
 
-.prof-summary div {
+.address .address-element {
   display: flex;
-  justify-content: space-between;
+  gap: 2rem;
+  padding: 0.5rem;
 }
 
 .prof-element {
