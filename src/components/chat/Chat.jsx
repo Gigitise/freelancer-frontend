@@ -6,8 +6,10 @@ import { useChatContext } from "../../providers/ChatProvider";
 import { useAuthContext } from "../../providers/AuthProvider";
 import { timeFormater } from "../../../utils/helpers/TimeFormater";
 import PulseLoader from "react-spinners/PulseLoader";
+import { useNavigate } from "react-router-dom";
 
 const Chat = ({ orderId, client, freelancer, isChatOpen, toggleChat }) => {
+  const navigate = useNavigate();
   const { loadedUserProfile, loadingUserProfile } = useAuthContext();
   const iconSize = 25;
   const { loadingChats, chats, getChats, sendChat, socket, typingData } =
@@ -67,7 +69,9 @@ const Chat = ({ orderId, client, freelancer, isChatOpen, toggleChat }) => {
     <div className={`chat ${isChatOpen ? "show" : ""}`}>
       <div className="chat-header">
         <div className="receiver-profile">
-          <article className="img-chat">{`${
+          <article className="img-chat"
+                   onClick={() => navigate(`../client-profile/${getReceiver()}`)}
+          >{`${
             getReceiver()?.charAt(0)?.toUpperCase() +
             getReceiver()?.slice(1).slice(0, 1)
           }`}</article>
