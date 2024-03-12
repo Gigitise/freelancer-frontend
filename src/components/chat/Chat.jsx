@@ -6,6 +6,7 @@ import { useChatContext } from "../../providers/ChatProvider";
 import { useAuthContext } from "../../providers/AuthProvider";
 import { timeFormater } from "../../../utils/helpers/TimeFormater";
 import PulseLoader from "react-spinners/PulseLoader";
+import { Link } from "react-router-dom";
 
 const Chat = ({ orderId, client, freelancer, isChatOpen, toggleChat }) => {
   const { loadedUserProfile, loadingUserProfile } = useAuthContext();
@@ -66,7 +67,8 @@ const Chat = ({ orderId, client, freelancer, isChatOpen, toggleChat }) => {
   return (
     <div className={`chat ${isChatOpen ? "show" : ""}`}>
       <div className="chat-header">
-        <div className="receiver-profile">
+        <Link to={`../client-profile/${getReceiver()}`}
+              className="receiver-profile">
           <article className="img-chat">{`${
             getReceiver()?.charAt(0)?.toUpperCase() +
             getReceiver()?.slice(1).slice(0, 1)
@@ -80,7 +82,7 @@ const Chat = ({ orderId, client, freelancer, isChatOpen, toggleChat }) => {
             <article>{getReceiver()}</article>
             {typing && <span>Typing...</span>}
           </div>
-        </div>
+        </Link>
         <IoCloseOutline className="close-chat" onClick={toggleChat} size={24} />
       </div>
       {loadingChats || loadingUserProfile ? (
