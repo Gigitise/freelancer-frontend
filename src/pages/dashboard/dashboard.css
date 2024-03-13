@@ -27,6 +27,7 @@
   gap: 1rem;
   width: 4rem;
   text-align: center !important;
+  padding: 0.5rem;
 }
 
 .order-content {
@@ -47,7 +48,6 @@
   background-color: #fff;
   color: #fff;
 }
-
 
 .order-content .title-box {
   text-align: start;
@@ -76,7 +76,7 @@
   justify-content: space-between;
 }
 
-.dark-mode .bottom-box{
+.dark-mode .bottom-box {
   color: #fff;
 }
 

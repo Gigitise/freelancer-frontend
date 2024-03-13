@@ -23,6 +23,8 @@ import { useSolutionModal } from "../../BiddingModal/SolutionModal";
 import { toast } from "react-hot-toast";
 import RatingOrderView from "../../../components/rating/order-review/RatingOrderView";
 import { IoPersonSharp } from "react-icons/io5";
+import { IoMdAdd } from "react-icons/io";
+import ViewMore from "../../../components/more/ScrollMore";
 
 const FloatingButton = ({ onClick }) => {
   return (
@@ -49,8 +51,6 @@ const OrderView = () => {
 
   const [loading, setLoading] = useState(true);
 
-  const uploadedAt = timeAgo(orderContent?.solution?.created);
-
   const [solutionType, setSolutionType] = useState("Draft");
 
   const deadline = formatDeadline(orderContent?.deadline);
@@ -58,6 +58,12 @@ const OrderView = () => {
   const deadlinePassed = checkDeadline(orderContent?.deadline);
 
   const [selectedFileName, setSelectedFileName] = useState("");
+
+  const [solution, setSolution] = useState({
+    list: null,
+    count: null,
+    next: null,
+  });
 
   const handleFileInputChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -67,6 +73,7 @@ const OrderView = () => {
     }
   };
   const openFileDialog = () => {
+    console.log("Open");
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
@@ -74,26 +81,36 @@ const OrderView = () => {
 
   const uploadAttachmentFile = () => {
     const attachment = fileInputRef.current.files[0];
-
+    console.log("Uploading...");
     if (attachment) {
       if (attachment.size <= 20 * 1024 * 1024) {
-        uploadAttachment(attachment, orderId, solutionType).then((res) => {
-          console.log(res);
+        try {
+          uploadAttachment(attachment, orderId, solutionType).then((res) => {
+            const updatedOrder = {
+              ...orderContent,
+              solution: res,
+            };
 
-          const updatedOrder = {
-            ...orderContent,
-            solution: res,
-          };
+            setSolution((prev) => {
+              return {
+                ...prev,
+                list: prev.list?.length > 0 ? [res].concat(prev.list) : [res],
+              };
+            });
+            toast.success("Successfully uploaded your solution");
 
-          orderContent.solution = res;
-
-          setOrderContent(updatedOrder);
-        });
+            orderContent.solution = res;
+            setSelectedFileName("");
+            setOrderContent(updatedOrder);
+          });
+        } catch (error) {
+          toast.error("Failed to upload ");
+        }
       } else {
-        console.log("Select a lower size file");
+        toast.error("Select a lower size file");
       }
     } else {
-      console.log("Select a correct file format");
+      toast.error("Please select a file");
     }
   };
 
@@ -114,6 +131,8 @@ const OrderView = () => {
         const status = getOrderById.status;
         if (status === 401) {
           navigate(`/login?order=${orderId}`);
+        } else if (status === 404) {
+          toast.error("We could not find that order");
         }
       }
       // return orderDetails;
@@ -138,11 +157,15 @@ const OrderView = () => {
     orderContent,
     setOrderContent
   );
+
+  const [selectedSolutionId, setSelectedSolutionId] = useState("");
+
   const { UpdateModal, setShowUpdateModal } = useUpdateModal(orderContent);
   const { DeleteModal, setShowDeleteModal } = useDeleteModal(setOrderContent);
   const { SolutionModal, setShowSolutionModal } = useSolutionModal(
     orderContent,
-    setOrderContent
+    selectedSolutionId,
+    setSolution
   );
 
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -151,6 +174,41 @@ const OrderView = () => {
     setIsChatOpen(!isChatOpen);
   };
 
+  const getSolutionForOrder = async (page) => {
+    const getSolution = await fetch(
+      `${ordersUrl}${orderId}/solution?page=${page}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userToken}`,
+        },
+      }
+    );
+
+    if (getSolution.ok) {
+      const response = await getSolution.json();
+
+      setSolution((prev) => {
+        return {
+          ...prev,
+          list: prev?.list
+            ? response.results.concat(prev?.list)
+            : response.results,
+          count: response.count,
+          next: response.next,
+        };
+      });
+    }
+  };
+
+  const deleteSolution = (id) => {
+    setShowSolutionModal(true);
+    setSelectedSolutionId(id);
+  };
+
+  useEffect(() => {
+    orderId && getSolutionForOrder(1);
+  }, [orderId]);
   return (
     <div className="order-view">
       {orderContent?.status === "Available" && (
@@ -211,6 +269,7 @@ const OrderView = () => {
               </div>
               <h2 className="card-jobtitle">
                 <Link
+                  style={{ width: "fit-content" }}
                   className="prof-disp-icon"
                   to={`../client-profile/${orderContent.client.user.username}`}
                 >
@@ -219,15 +278,11 @@ const OrderView = () => {
                   </div>
                   <span>{orderContent.client.user.username}</span>
                 </Link>
-                <span className="inline-flex ml-4 mt-2 justify-center ">
+                <span className="inline-flex mt-2 justify-center ">
                   {orderContent?.status != "Completed" && (
                     <div>
                       {deadlinePassed && (
-                        <article
-                          style={{
-                            color: "red",
-                          }}
-                        >
+                        <article>
                           {deadline}
                           <span className="ml-2">overdue</span>
                         </article>
@@ -244,53 +299,22 @@ const OrderView = () => {
               {orderContent.rating && (
                 <div className="review-box">
                   <RatingOrderView order={orderContent} />
-                  {/* <div className="flex gap-0.5">
-                    {[...Array(orderContent.rating.stars)].map((_, index) => (
-                      <svg
-                        key={index}
-                        className="h-6 w-6 shrink-0 fill-amber-400"
-                        viewBox="0 0 256 256"
-                      >
-                        <path d="M239.2 97.4A16.4 16.4.0 00224.6 86l-59.4-4.1-22-55.5A16.4 16.4.0 00128 16h0a16.4 16.4.0 00-15.2 10.4L90.4 82.2 31.4 86A16.5 16.5.0 0016.8 97.4 16.8 16.8.0 0022 115.5l45.4 38.4L53.9 207a18.5 18.5.0 007 19.6 18 18 0 0020.1.6l46.9-29.7h.2l50.5 31.9a16.1 16.1.0 008.7 2.6 16.5 16.5.0 0015.8-20.8l-14.3-58.1L234 115.5A16.8 16.8.0 00239.2 97.4z"></path>
-                      </svg>
-                    ))}
-                    {[...Array(5 - orderContent.rating.stars)].map(
-                      (_, index) => (
-                        <svg
-                          key={index}
-                          className="h-6 w-6 shrink-0 fill-gray-300"
-                          viewBox="0 0 256 256"
-                        >
-                          <path d="M239.2 97.4A16.4 16.4.0 00224.6 86l-59.4-4.1-22-55.5A16.4 16.4.0 00128 16h0a16.4 16.4.0 00-15.2 10.4L90.4 82.2 31.4 86A16.5 16.5.0 0016.8 97.4 16.8 16.8.0 0022 115.5l45.4 38.4L53.9 207a18.5 18.5.0 007 19.6 18 18 0 0020.1.6l46.9-29.7h.2l50.5 31.9a16.1 16.1.0 008.7 2.6 16.5 16.5.0 0015.8-20.8l-14.3-58.1L234 115.5A16.8 16.8.0 00239.2 97.4z"></path>
-                        </svg>
-                      )
-                    )}
-                  </div> */}
-                  {/* <div class="instructions mt-3">
-                    <strong>OVERALL RATING</strong>
-
-                    <article className="mt-1 ml-2">
-                      <span className="mr-2  ">message:</span>
-                      {orderContent.rating.message}
-                    </article>
-                  </div> */}
                 </div>
               )}
 
               {(orderContent.status === "Completed" ||
                 orderContent.status === "In Progress") && (
                 <div className="order-soln">
-                  {orderContent?.solution && loadingAttachemnt ? (
+                  {solution.list?.length > 0 && loadingAttachemnt ? (
                     <div className="animate-pulse"></div>
                   ) : (
                     <div className="solution">
                       <strong>
-                        {orderContent?.solution ? "Solutions" : "Solutions"}
-
-                        {orderContent?.status === "In Progress" && (
+                        {solution.list?.length > 0 ? "Solutions" : "Solution"}
+                        {/* {orderContent?.status === "In Progress" && (
                           <>
                             <input
-                              onChange={uploadAttachmentFile}
+                              // onChange={uploadAttachmentFile}
                               ref={fileInputRef}
                               className="hidden"
                               size={20 * 1024 * 1024}
@@ -299,102 +323,143 @@ const OrderView = () => {
                               id=""
                             />
                           </>
-                        )}
+                        )} */}
                       </strong>
                     </div>
                   )}
-                  {!orderContent?.solution &&
-                    orderContent?.status === "In Progress" && (
-                      <div className="upload-div">
-                        <span
-                          onClick={openFileDialog}
-                          className="block w-[105px] md:w-full lg:w-full cursor-pointer  h-auto  border border-sky-300 border-dashed bg-accent px-3 py-2 text-sm transition  focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600 "
+                  {orderContent?.status === "In Progress" && (
+                    <div className="upload-div">
+                      <span
+                        onClick={openFileDialog}
+                        className="block w-[105px] md:w-full lg:w-full cursor-pointer  h-auto  border border-sky-300 border-dashed bg-accent px-3 py-2 text-sm transition  focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600 "
+                      >
+                        <p
+                          style={{ textOverflow: "ellipsis" }}
+                          className="text-center justify-center align-middle flex mt-1 truncate text-sky-400"
                         >
-                          <p className="text-center justify-center align-middle flex mt-1 truncate text-sky-400">
-                            {selectedFileName
-                              ? selectedFileName
-                              : "Upload solution"}
-                          </p>
+                          {selectedFileName
+                            ? selectedFileName
+                            : solution.list?.length > 0
+                            ? "Attach another solution"
+                            : "Attach your solution file here"}
+                        </p>
 
-                          <input
-                            onChange={(e) => {
-                              setSolutionType("Draft");
-                              handleFileInputChange(e);
-                            }}
-                            ref={fileInputRef}
-                            className="hidden"
-                            size={20 * 1024 * 1024}
-                            type="file"
-                            name=""
-                            id="photobutton"
-                          />
-                        </span>
+                        <input
+                          onChange={(e) => {
+                            setSolutionType("Draft");
+                            handleFileInputChange(e);
+                          }}
+                          ref={fileInputRef}
+                          className="hidden"
+                          size={20 * 1024 * 1024}
+                          type="file"
+                          name=""
+                          id="photobutton"
+                        />
+                      </span>
 
-                        <div className="">
-                          <select
-                            onChange={(e) => setSolutionType(e.target.value)}
-                            value={solutionType}
-                            className="h-10 border-2 border-sky-500 mr-3 ml-4 focus:outline-none focus:border-sky-400 text-sky-400 rounded py-0 md:py-1 tracking-wider"
-                          >
-                            <option value="Draft">Draft</option>
-                            <option value="Final">Final</option>
-                          </select>
-                        </div>
-
-                        <a
-                          onClick={uploadAttachmentFile}
-                          className="inline-flex px-3 py-3 left-0 ml-4  text-sm font-medium bg-sky-400 border border-sky-400 rounded  cursor-pointer focus:outline-none focus:ring"
+                      <div className="">
+                        <select
+                          onChange={(e) => setSolutionType(e.target.value)}
+                          value={solutionType}
+                          className="h-10 border-2 border-sky-500 mr-3 ml-4 focus:outline-none focus:border-sky-400 text-sky-400 rounded py-0 md:py-1 tracking-wider"
                         >
-                          Submit
-                        </a>
+                          <option value="Draft">Draft</option>
+                          <option value="Final">Final</option>
+                        </select>
                       </div>
-                    )}
 
-                  {orderContent?.solution && (
-                    <div className="solution-uploaded flex ">
-                      <div className="file">
-                        <a
-                          href={orderContent?.solution?.solution}
-                          id="solution-file"
-                          rel="noopener noreferrer"
-                          download
-                          className="block rounded-lg p-3 shadow-sm bg-accent w-[100px] md:max-w-[200px] lg:w-full truncate"
-                        >
-                          {typeof orderContent?.solution?.solution === "string"
-                            ? orderContent?.solution?.solution.substring(
-                                orderContent?.solution?.solution.lastIndexOf(
-                                  "/"
-                                ) + 1
-                              )
-                            : ""}
-                        </a>
-                        <div>
-                          <dl>
-                            <div>
-                              <dd
-                                className={`text-[14px] ${
-                                  orderContent?.solution._type === "Final"
-                                    ? "text-green-500"
-                                    : "text-orange-500"
-                                }`}
-                              >
-                                {orderContent?.solution?._type}
-                              </dd>
-                            </div>
-                          </dl>
-                        </div>
-                        {orderContent?.status === "In Progress" && (
-                          <div>
-                            <RiDeleteBin6Line
-                              onClick={() => setShowSolutionModal(true)}
-                              className="cursor-pointer text-white h-7 w-7 "
-                              size={64}
-                            />
-                          </div>
-                        )}
-                        <span className="text-white">{uploadedAt}</span>
-                      </div>
+                      <a
+                        onClick={uploadAttachmentFile}
+                        className="inline-flex px-3 py-3 left-0 ml-4  text-sm font-medium bg-sky-400 border border-sky-400 rounded  cursor-pointer focus:outline-none focus:ring"
+                      >
+                        Submit
+                      </a>
                     </div>
+                  )}
+
+                  {solution.list?.length > 0 && (
+                    <>
+                      <div className="solution-uploaded flex ">
+                        {solution.list.map((sln) => {
+                          return (
+                            <div className="file">
+                              <a
+                                href={sln?.solution}
+                                id="solution-file"
+                                rel="noopener noreferrer"
+                                download
+                                className="block rounded-lg p-3 shadow-sm bg-accent w-[100px] md:max-w-[200px] lg:w-full truncate"
+                              >
+                                {typeof sln?.solution === "string"
+                                  ? sln?.solution.substring(
+                                      sln?.solution.lastIndexOf("/") + 1
+                                    )
+                                  : ""}
+                              </a>
+                              <div>
+                                <dl>
+                                  <div>
+                                    <dd
+                                      className={`text-[14px] ${
+                                        sln?._type === "Final"
+                                          ? "text-green-500"
+                                          : "text-orange-500"
+                                      }`}
+                                    >
+                                      {sln?._type}
+                                    </dd>
+                                  </div>
+                                </dl>
+                              </div>
+                              {orderContent?.status === "In Progress" && (
+                                <div>
+                                  <RiDeleteBin6Line
+                                    onClick={() =>
+                                      deleteSolution(sln?.id.toString())
+                                    }
+                                    className="cursor-pointer text-white h-7 w-7 "
+                                    size={64}
+                                  />
+                                </div>
+                              )}
+                              <span className="text-white">
+                                {timeAgo(sln?.created)}
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                      {solution.next && (
+                        <ViewMore fetch={getSolutionForOrder} />
+                      )}
+                      {/* <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "2rem",
+                        }}
+                      >
+                        <IoMdAdd
+                          size={24}
+                          style={{ cursor: "pointer" }}
+                          onClick={() => openFileDialog()}
+                        />
+                        <input
+                          onChange={(e) => {
+                            setSolutionType("Draft");
+                            handleFileInputChange(e);
+                          }}
+                          ref={fileInputRef}
+                          className="hidden"
+                          size={20 * 1024 * 1024}
+                          type="file"
+                          name=""
+                          id="photobutton"
+                        />
+                        <span>Add another solution</span>
+                      </div> */}
+                    </>
                   )}
                 </div>
               )}
@@ -435,7 +500,7 @@ const OrderView = () => {
                     (orderContent?.status === "In Progress" ||
                       orderContent?.status === "Available") && (
                       <div className="upload-div">
-                        <article onClick={openFileDialog}>
+                        <article>
                           No Attachments available at the moment.
                         </article>
                       </div>

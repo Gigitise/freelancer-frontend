@@ -4,7 +4,13 @@ import { useState, useCallback, useMemo } from "react";
 import { useAuthContext } from "../../providers/AuthProvider";
 import { toast } from "react-hot-toast";
 
-const SolutionModal = ({ showSolutionModal, setSolutionModal, setOrderContent,order }) => {
+const SolutionModal = ({
+  showSolutionModal,
+  setSolutionModal,
+  setSolution,
+  order,
+  selectedSolutionId,
+}) => {
   const { userToken } = useAuthContext();
 
   const handleCloseModal = () => {
@@ -12,23 +18,35 @@ const SolutionModal = ({ showSolutionModal, setSolutionModal, setOrderContent,or
   };
 
   const handleConfirmDelete = async () => {
-    const DeleteSolutionUrl = `${
-      import.meta.env.VITE_API_URL
-    }/orders/${order.id}/solution/?solution-id=${order.solution.id}`;
+    const DeleteSolutionUrl = `${import.meta.env.VITE_API_URL}/orders/${
+      order.id
+    }/solution/?solution-id=${selectedSolutionId}`;
     try {
-      const response = await fetch(DeleteSolutionUrl, {
+      const performDelete = await fetch(DeleteSolutionUrl, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${userToken}`,
         },
       });
-      if (response.ok) { 
+      if (performDelete.ok) {
         toast.success("Solution deleted successfully");
-        setOrderContent(prevOrderContent => ({
-          ...prevOrderContent,
-          solution: null
-        }));
+        const response = await performDelete.json();
+        setSolution((prev) => {
+          const newSolutions = prev.list.filter(
+            (solution) => solution.id !== response.id
+          );
+
+          return {
+            ...newSolutions,
+            list: newSolutions,
+          };
+        });
+
+        // setOrderContent((prevOrderContent) => ({
+        //   ...prevOrderContent,
+        //   solution: null,
+        // }));
       } else {
         toast.error("Failed to delete solution");
       }
@@ -36,16 +54,13 @@ const SolutionModal = ({ showSolutionModal, setSolutionModal, setOrderContent,or
       toast.error("Error deleting solution:", error);
     } finally {
       handleCloseModal();
-      
     }
   };
 
   return (
     <Modal showModal={showSolutionModal} setShowModal={setSolutionModal}>
       <div className="fixed inset-0 z-40 min-h-full overflow-y-auto overflow-x-hidden transition flex items-center">
-        <div
-          className="fixed inset-0 w-full h-full bg-black/50 cursor-pointer"
-        ></div>
+        <div className="fixed inset-0 w-full h-full bg-black/50 cursor-pointer"></div>
 
         <div className="relative w-full cursor-pointer pointer-events-none transition my-auto p-4 ">
           <div className="w-full py-2 bg-gray-700 cursor-default pointer-events-auto dark:bg-gray-800 relative rounded-xl mx-auto max-w-sm">
@@ -123,22 +138,19 @@ const SolutionModal = ({ showSolutionModal, setSolutionModal, setOrderContent,or
   );
 };
 
-export function useSolutionModal(order, setOrderContent) {
+export function useSolutionModal(order, selectedSolutionId, setSolution) {
   const [showSolutionModal, setShowSolutionModal] = useState(false);
-
-  const SolutionModalCallback = useCallback(
-    () => {
-      return (
-        <SolutionModal
-          showSolutionModal={showSolutionModal}
-          setSolutionModal={setShowSolutionModal}
-          setOrderContent={setOrderContent}
-          order={order}
-        />
-      );
-    },
-    [showSolutionModal,order]
-  );
+  const SolutionModalCallback = useCallback(() => {
+    return (
+      <SolutionModal
+        showSolutionModal={showSolutionModal}
+        setSolutionModal={setShowSolutionModal}
+        setSolution={setSolution}
+        order={order}
+        selectedSolutionId={selectedSolutionId}
+      />
+    );
+  }, [showSolutionModal, order]);
 
   return useMemo(
     () => ({ setShowSolutionModal, SolutionModal: SolutionModalCallback }),
