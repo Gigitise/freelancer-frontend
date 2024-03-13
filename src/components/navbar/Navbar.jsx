@@ -59,7 +59,7 @@ const Navbar = () => {
 
   return (
     <div className={`top-nav ${searchVisible ? "search-visible" : ""} ${theme === "light" ? "light-mode" : "dark-mode"} `}
-    style={{ backgroundColor: theme === "light" ? "#7fc2f5" : "" }}>
+    style={{ backgroundColor: theme === "light" ? "#7fc2f5" : "", borderBottom: theme === "light" ? "#fff" : "" }}>
       <div className="icons">
         <div className="search-icon" onClick={() => setSearchVisible(!searchVisible)}>
         {searchVisible && (
@@ -97,47 +97,41 @@ const Navbar = () => {
         )}
       </div>
       <div className={`profile ${searchVisible ? "visible" : ""}`}>
-        <div
-          className={`mini-elements ${
-            showMoreElements ? "show-mini-elements" : "hide-mini-elements"
-          }`}
-          ref={navRef}
-        >
-          <div onClick={() => handleLogOut()}>
-            <article className="logout">Logout</article>
-            <span>
-              <IoIosLogOut className="desc" size={iconSize} />
-            </span>
-          </div>
-          <div
-            className="notif-bell"
-            style={{ cursor: "pointer" }}
-            onClick={() => navigate("./notifications")}
-          >
-            <span className="desc">Notifications</span>
-            <span>
-              <IoMdNotificationsOutline
-                className="notif-icon"
-                size={iconSize}
-              />
-            </span>
-            {unreadNotifCount > 0 && (
-              <div className="red">
-                <div>
-                  <article>
-                    {unreadNotifCount > 9 ? "9+" : unreadNotifCount}
-                  </article>
-                </div>
-              </div>
-            )}
-          </div>
-          <div className="settings" onClick={() => navigate("./settings")}>
-            <span className="desc">Settings</span>
-            <span>
-              <IoMdSettings style={{ cursor: "pointer" }} size={iconSize} />
-            </span>
-          </div>
+       <div
+  className={`mini-elements ${showMoreElements ? "show-mini-elements" : "hide-mini-elements"}`}
+  ref={navRef}
+>
+  <div onClick={() => handleLogOut()}>
+    <article className="logout">Logout</article>
+    <span>
+      <IoIosLogOut className="desc" size={iconSize} />
+    </span>
+  </div>
+  <div
+    className="notif-bell"
+    style={{ cursor: "pointer" }}
+    onClick={() => navigate("./notifications")}
+  >
+    <span className="desc">Notifications</span>
+    <span>
+      <IoMdNotificationsOutline className="notif-icon" size={iconSize} />
+    </span>
+    {unreadNotifCount > 0 && (
+      <div className="red">
+        <div>
+          <article>{unreadNotifCount > 9 ? "9+" : unreadNotifCount}</article>
         </div>
+      </div>
+    )}
+  </div>
+  <div className="settings" onClick={() => navigate("./settings")}>
+    <span className="desc">Settings</span>
+    <span>
+      <IoMdSettings style={{ cursor: "pointer" }} size={iconSize} />
+    </span>
+  </div>
+</div>
+
         <div className="profile-info" onClick={() => navigate("./profile")}>
           <article
             className={loadingUserProfile ? "username-skeleton" : ""}
