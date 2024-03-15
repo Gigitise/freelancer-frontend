@@ -54,10 +54,10 @@ const PasswordReset = () => {
     };
 
     return (
-        <div className="antialiased min-h-screen flex flex-col justify-center py-12 bg-[#f7fafc] sm:px-6 lg:px-8 px-6   ">
-            <div className="max-w-lg mx-auto my-10 bg-[#f7fafc] p-8 rounded-xl shadow shadow-slate-300">
-                <h1 className="text-2xl font-medium">Reset your Gigitise password</h1>
-                <p className="text-slate-500 mt-3">
+        <div className="antialiased min-h-screen flex flex-col justify-center py-12 bg-[#374151] sm:px-6 lg:px-8 px-6   ">
+            <div className="max-w-lg mx-auto my-10 bg-[#404c5e] p-8 rounded-xl shadow shadow-slate-300">
+                <h1 className="text-2xl font-medium text-slate-200">Reset your Gigitise password</h1>
+                <p className="text-slate-200 mt-3">
                     {' '}
                     We {emailSession ? 'sent' : 'will send'} a reset link to
                     {emailSession ? (
@@ -72,10 +72,10 @@ const PasswordReset = () => {
                 </p>
                 <form onSubmit={resetPassword} className="my-10">
                     <div className="flex flex-col space-y-5">
-                    <label for="input-6" class="block text-sm font-medium text-gray-700 dark:text-gray-100">Email :</label>
-    <div class="relative mt-0">
-        <input  required defaultValue={emailSession&&sessionStorage.getItem('email-session')} readOnly={false} type="email" id='email'  className="block w-full h-10 pl-8 pr-3 mt-1 text-sm text-gray-700 border focus:outline-none rounded shadow-sm focus:border-blue-500" ref={emailRef} placeholder="user@xyz.com"/>
-        <span class="absolute inset-y-0 left-0 flex items-center justify-center ml-2"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-4 h-4 text-blue-400 pointer-events-none"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    <label for="input-6" class="block text-sm font-medium  text-gray-100">Email :</label>
+    <div class="relative mt-0  ">
+        <input  required defaultValue={emailSession&&sessionStorage.getItem('email-session')} readOnly={false} type="email" id='email'  className="block w-full h-10 pl-8 pr-3 mt-1 text-sm text-gray-200  bg-slate-400 border focus:outline-none rounded shadow-sm focus:border-blue-500" ref={emailRef} placeholder="user@xyz.com"/>
+        <span class="absolute inset-y-0 left-0 flex items-center justify-center ml-2 text-slate-200"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-4 h-4 text-blue-600 pointer-events-none"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
         </span>
     </div>
                         {sendingEmail ? (
@@ -131,8 +131,23 @@ const PasswordReset = () => {
                                 </svg>
                                 <span>Reset password</span>
                             </button>
+                            
                         )}
-                        
+                        <a
+                        href='/app'
+                                className="w-full py-3 font-medium text-white bg-accent hover:bg-[#7fc2f5] rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" 
+                                    fill="none" 
+                                    viewBox="0 0 24 24" 
+                                    strokeWidth={1.5} 
+                                    stroke="currentColor" 
+                                    className="w-6 h-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
+                                </svg>
+
+                                <span> back </span>
+                            </a>
                     </div>
                 </form>
             </div>
