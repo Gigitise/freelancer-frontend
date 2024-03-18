@@ -4,12 +4,7 @@ import { useState, useCallback, useMemo, useEffect } from "react";
 import { useAuthContext } from "../../providers/AuthProvider";
 import { toast } from "react-hot-toast";
 
-const UpdateModal = ({
-  showUpdateModal,
-  setUpdateModal,
-  order,
- 
-}) => {
+const UpdateModal = ({ showUpdateModal, setUpdateModal, order }) => {
   const [bidAmount, setBidAmount] = useState(order.amount);
   const { orderId } = useParams();
   const { userToken, loadedUserProfile } = useAuthContext();
@@ -66,7 +61,6 @@ const UpdateModal = ({
 
         console.log(updatedBid);
         setMyBid(updatedBid);
-        
       } else {
         console.error("Failed to update bid:", response.statusText);
       }
@@ -132,13 +126,14 @@ const UpdateModal = ({
                     Minimum bid amount is ${parseFloat(order.amount)}
                   </small>
                 </>
-                
               )}
-                {order.status !== "Available" && (
-              <div className="text-red-500">
-                {toast.error("This order has been allocated to another client.")}
-              </div>
-            )}
+              {order.status !== "Available" && (
+                <div className="text-red-500">
+                  {toast.error(
+                    "This order has been allocated to another client."
+                  )}
+                </div>
+              )}
               <div className="relative mt-2 rounded-md shadow-sm">
                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                   <span className="text-gray-200 sm:text-sm">$</span>

@@ -38,7 +38,6 @@ const BiddingModal = ({
       if (response.ok) {
         const newBid = await response.json();
         toast.success("Bid placed");
-        console.log(newBid);
         setOrderContent(newBid);
       } else {
         const status = response.status;

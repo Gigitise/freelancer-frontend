@@ -391,6 +391,7 @@ export const OrderProvider = (props) => {
           return {
             ...prev,
             orders: [newOrder].concat(prev.orders),
+            count: prev.count + 1,
           };
         });
         // setOrders((prev) => {
