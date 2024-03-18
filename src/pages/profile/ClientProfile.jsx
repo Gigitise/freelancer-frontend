@@ -93,7 +93,7 @@ const ClientProfile = () => {
               </article>
             </div>
           </div>
-          <div className="address text-white flex mt-10">
+          <div className="address text-white mt-10">
             <div className="address-element">
               {clientData?.address.country ? (
                 <div className="flex mr-10">
@@ -108,12 +108,12 @@ const ClientProfile = () => {
                 <span>Loading Country</span>
               )}
             </div>
-            <div className="address-element ml-10">
+            <div className="address-element">
               <span>Time Zone: </span>
               {clientData?.address.timezone}
             </div>
           </div>
-          <div className="prof-summary flex flex-wrap gap-4 w-full items-center mt-4">
+          <div className="prof-summary gap-4 w-full items-center mt-4">
             <div className="prof-element justify-between p-4 border border-gray-600 flex items-center flex-1 text-gray-600">
               <div className="flex items-center gap-2">
                 <MdTaskAlt className="text-white" size={iconSize} />

@@ -6,7 +6,7 @@
 .settings-personal {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .settings-personal .feature-1,
@@ -16,7 +16,7 @@
   padding: 1rem;
   border-radius: 8px;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .light-mode .settings-personal .feature-1 {
