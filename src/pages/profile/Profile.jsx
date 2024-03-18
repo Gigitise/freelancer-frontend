@@ -111,7 +111,7 @@ const Profile = () => {
               )}
             </div>
           </div>
-          <div className="prof-summary w-full items-center mt-4">
+          <div className="prof-summary w-full mt-4">
             <div className="prof-element justify-between p-4 border border-sky-300 flex items-center w-full text-gray-600">
               <div className="flex items-center gap-2">
                 <MdTaskAlt className="text-sky-300" size={iconSize} />
