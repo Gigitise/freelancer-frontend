@@ -29,6 +29,7 @@ const DeleteModal = ({ showDeleteModal, setDeleteModal, setOrderContent }) => {
         toast.success("Bid deleted successfully");
         setOrderContent(newOrder);
       } else {
+        toast.error("Failed to delete bid");
         console.error("Failed to delete bid:", response.statusText);
       }
     } catch (error) {
@@ -42,9 +43,7 @@ const DeleteModal = ({ showDeleteModal, setDeleteModal, setOrderContent }) => {
   return (
     <Modal showModal={showDeleteModal} setShowModal={setDeleteModal}>
       <div className="fixed inset-0 z-40 min-h-full overflow-y-auto overflow-x-hidden transition flex items-center">
-        <div
-          className="fixed inset-0 w-full h-full bg-black/50 cursor-pointer"
-        ></div>
+        <div className="fixed inset-0 w-full h-full bg-black/50 cursor-pointer"></div>
 
         <div className="relative w-full cursor-pointer pointer-events-none transition my-auto p-4 ">
           <div className="w-full py-2 bg-gray-700 cursor-default pointer-events-auto dark:bg-gray-800 relative rounded-xl mx-auto max-w-sm">
