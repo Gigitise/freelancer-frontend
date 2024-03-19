@@ -356,21 +356,45 @@ export const OrderProvider = (props) => {
     }
   };
 
-  // useEffect(()=>{
+  const handleConfirmDelete = async ({ newOrder }) => {
+    setOrdersBidding((prev) => {
+      const newOrders = prev?.orders.filter((order) => {
+        return order.id !== newOrder.id;
+      });
+      return {
+        ...prev,
+        orders: newOrders,
+        count: prev.count - 1,
+      };
+    });
+    setOrdersAvailable((prev) => {
+      return {
+        ...prev,
+        orders: [newOrder].concat(prev.orders),
+        count: prev.count + 1,
+      };
+    });
+  };
 
-  // },[])
-
-  // socket.onmessage = (event) => {
-  //     const receivedData = JSON.parse(event.data);
-  //     const newOrder = (receivedData.message.order);
-  //     console.log("Received ", receivedData);
-  //     setOrders(prev=>{
-  //         const updatedOrders = [newOrder, ...prev];
-  //         const inProgress = updatedOrders.filter(order=>order.status==='In Progress');
-  //         setOrdersInProgress(inProgress);
-  //         return updatedOrders;
-  //     });
-  // }
+  const updateOrders = ({ newOrder }) => {
+    setOrdersAvailable((prev) => {
+      const newOrders = prev?.orders.filter((order) => {
+        return order.id !== newOrder.id;
+      });
+      return {
+        ...prev,
+        orders: newOrders,
+        count: prev.count - 1,
+      };
+    });
+    setOrdersBidding((prev) => {
+      return {
+        ...prev,
+        orders: [newOrder].concat(prev.orders),
+        count: prev.count + 1,
+      };
+    });
+  };
 
   useEffect(() => {
     setUser(decodedToken?.user_id);
@@ -394,11 +418,103 @@ export const OrderProvider = (props) => {
             count: prev.count + 1,
           };
         });
-        // setOrders((prev) => {
-        //   const updatedOrders = [newOrder, ...prev];
-        //   setOrdersAvailable(updatedOrders);
-        //   return updatedOrders;
-        // });
+      };
+      setSocket(newSocket);
+    } else {
+      socket?.close();
+    }
+
+    return () => {
+      if (socket) {
+        socket.close();
+      }
+    };
+  }, [decodedToken, user]);
+
+  useEffect(() => {
+    setUser(decodedToken?.user_id);
+    if (user) {
+      console.log("Connected");
+      const newSocket = new WebSocket(
+        `${
+          isSecureConnection
+            ? import.meta.env.VITE_WSS_URL
+            : import.meta.env.VITE_WS_URL
+        }/hire/${user}/`
+      );
+      setSocket(newSocket);
+      newSocket.onmessage = (event) => {
+        const receivedData = JSON.parse(event.data);
+        const newOrder = receivedData.message.order;
+        setOrdersBidding((prev) => {
+          console.log(prev.orders);
+          const newOrders = prev?.orders?.filter((order) => {
+            return order.id !== newOrder.id;
+          });
+
+          console.log(newOrders);
+
+          return {
+            ...prev,
+            orders: newOrders,
+            count: prev.count - 1,
+          };
+        });
+
+        setOrdersInProgress((prev) => {
+          return {
+            ...prev,
+            orders: [newOrder].concat(prev.orders),
+            count: prev.count + 1,
+          };
+        });
+      };
+      setSocket(newSocket);
+    } else {
+      socket?.close();
+    }
+
+    return () => {
+      if (socket) {
+        socket.close();
+      }
+    };
+  }, [decodedToken, user]);
+
+  useEffect(() => {
+    setUser(decodedToken?.user_id);
+    if (user) {
+      console.log("Connected");
+      const newSocket = new WebSocket(
+        `${
+          isSecureConnection
+            ? import.meta.env.VITE_WSS_URL
+            : import.meta.env.VITE_WS_URL
+        }/completed/${user}/`
+      );
+      setSocket(newSocket);
+      newSocket.onmessage = (event) => {
+        const receivedData = JSON.parse(event.data);
+        const newOrder = receivedData.message.order;
+        setOrdersInProgress((prev) => {
+          const newOrders = prev?.orders?.filter((order) => {
+            return order.id !== newOrder.id;
+          });
+
+          return {
+            ...prev,
+            orders: newOrders,
+            count: prev.count - 1,
+          };
+        });
+
+        setOrdersCompleted((prev) => {
+          return {
+            ...prev,
+            orders: [newOrder].concat(prev.orders),
+            count: prev.count + 1,
+          };
+        });
       };
       setSocket(newSocket);
     } else {
@@ -414,9 +530,9 @@ export const OrderProvider = (props) => {
 
   const updateOrdersAvailable = (orderRes) => {
     setOrdersAvailable((prev) => {
-      const updatedOrders = prev.orders.filter(
-        (order) => order.id !== orderRes?.id
-      );
+      const updatedOrders = prev.orders.filter((order) => {
+        return order.id !== orderRes?.id;
+      });
       return {
         ...prev,
         orders: updatedOrders,
@@ -435,8 +551,6 @@ export const OrderProvider = (props) => {
       };
     });
   };
-
-  // const [orderDetails, setOrderDetails] = useState();
 
   useEffect(() => {
     // userToken && getAllOrders();
@@ -471,6 +585,8 @@ export const OrderProvider = (props) => {
         uploadAttachment,
         updateOrdersAvailable,
         getBidding,
+        handleConfirmDelete,
+        updateOrders,
       }}
     >
       {props.children}

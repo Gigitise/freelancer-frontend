@@ -3,6 +3,7 @@ import Modal from "./modal";
 import { useState, useCallback, useMemo } from "react";
 import { useAuthContext } from "../../providers/AuthProvider";
 import { toast } from "react-hot-toast";
+import { useOrderContext } from "../../providers/OrderProvider";
 
 const BiddingModal = ({
   showBiddingModal,
@@ -12,6 +13,8 @@ const BiddingModal = ({
 }) => {
   const [bidAmount, setBidAmount] = useState(order.amount);
   const { userToken } = useAuthContext();
+
+  const { updateOrders } = useOrderContext();
 
   const handleBidSubmit = async (e) => {
     e.preventDefault();
@@ -36,9 +39,10 @@ const BiddingModal = ({
       );
 
       if (response.ok) {
-        const newBid = await response.json();
+        const newOrder = await response.json();
         toast.success("Bid placed");
-        setOrderContent(newBid);
+        setOrderContent(newOrder);
+        updateOrders({ newOrder });
       } else {
         const status = response.status;
         if (status === 401 || status === 404) {
