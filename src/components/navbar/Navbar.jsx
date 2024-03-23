@@ -19,7 +19,7 @@ const Navbar = () => {
   const { theme } = useContext(ThemeContext);
 
   const [showMoreElements, setShowMoreElements] = useState(false);
-  const [searchVisible, setSearchVisible] = useState(true);
+  const [searchVisible, setSearchVisible] = useState(false);
   
 
   const navRef = useRef(null);
