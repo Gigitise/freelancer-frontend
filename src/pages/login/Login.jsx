@@ -47,7 +47,7 @@ const Login = () => {
             required 
             id='username'
             ref={usernameRef} value={username} onChange={(e)=>setUsername(e.target.value)} 
-            className='bg-gray-700'
+            className='bg-gray-700 pl-3'
             type="text" 
             placeholder='Username'
           />
@@ -57,7 +57,7 @@ const Login = () => {
           <input 
             required 
             id='password' 
-            className='bg-gray-700'
+            className='bg-gray-700 pl-3'
             ref={passwordRef} value={password} onChange={(e)=>setPassword(e.target.value)} 
             type={visible ? "text" : "password"} 
             placeholder='Password' 

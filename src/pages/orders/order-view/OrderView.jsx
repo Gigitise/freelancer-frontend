@@ -328,14 +328,14 @@ const OrderView = () => {
                     </div>
                   )}
                   {orderContent?.status === "In Progress" && (
-                    <div className="upload-div">
+                    <div className="upload-div max-w-auto">
                       <span
                         onClick={openFileDialog}
-                        className="block w-[105px] md:w-full lg:w-full cursor-pointer  h-auto  border border-sky-300 border-dashed bg-accent px-3 py-2 text-sm transition  focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600 "
+                        className="block   cursor-pointer  h-auto w-auto    border border-sky-300 border-dashed bg-accent px-3 py-2 text-sm transition  focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600 "
                       >
                         <p
-                          style={{ textOverflow: "ellipsis" }}
-                          className="text-center justify-center align-middle flex mt-1 truncate text-sky-400"
+                        style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}
+                          className="md:text-center justify-center align-middle flex mt-1 truncate max-w-[150px] md:max-w-[250px] lg:max-w-[300px] text-sky-400"
                         >
                           {selectedFileName
                             ? selectedFileName
