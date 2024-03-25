@@ -235,7 +235,18 @@ const OrderView = () => {
               </strong>
               <div className="order-elements">
                 <article className="category">{orderContent?.category}</article>
-                <strong>{!loading && "$" + orderContent?.amount}</strong>
+                {console.log(orderContent)}
+                {orderContent?.subject && (
+                  <article>{orderContent?.subject}</article>
+                )}
+                {orderContent?.category === "Writing" ? (
+                  <article>{orderContent?.milestones} Pages</article>
+                ) : (
+                  <article>{orderContent?.milestones} Milestones</article>
+                )}
+                <strong style={{ fontWeight: "bold" }}>
+                  {!loading && "$" + orderContent?.amount}
+                </strong>
                 {orderContent?.status === "Available" && (
                   <>
                     {myBid ? (
@@ -334,7 +345,10 @@ const OrderView = () => {
                         className="block   cursor-pointer  h-auto w-auto    border border-sky-300 border-dashed bg-accent px-3 py-2 text-sm transition  focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600 "
                       >
                         <p
-                        style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}
+                          style={{
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                          }}
                           className="md:text-center justify-center align-middle flex mt-1 truncate max-w-[150px] md:max-w-[250px] lg:max-w-[300px] text-sky-400"
                         >
                           {selectedFileName
