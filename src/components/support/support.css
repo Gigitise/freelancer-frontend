@@ -1,0 +1,59 @@
+.support {
+  position: fixed;
+  right: 1%;
+  bottom: 2%;
+  width: 28dvw;
+  height: 80dvh;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: var(--bg-color);
+}
+
+.support .chat-header .left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.support .chat-header {
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.support-profile {
+  background-color: var(--accent-sec-color);
+}
+
+.quick {
+  display: flex;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.quick-btn {
+  background-color: green;
+}
+
+.support-profile .pic {
+  background-color: white;
+  height: 4rem;
+  width: 4rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+}
+
+.close-support {
+  height: 0 !important;
+}
+
+.messages-box-support {
+  height: 100%;
+  /* padding: 0.2rem; */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+  overflow-y: auto;
+}

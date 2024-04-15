@@ -63,14 +63,15 @@ const Chat = ({ orderId, client, freelancer, isChatOpen, toggleChat }) => {
 
   useEffect(() => {
     orderId && getChats(orderId);
-  }, [orderId, loadedUserProfile]);
+  }, [orderId]);
 
   return (
     <div className={`chat ${isChatOpen ? "show" : ""}`}>
       <div className="chat-header">
         <div className="receiver-profile">
-          <article className="img-chat"
-                   onClick={() => navigate(`../client-profile/${getReceiver()}`)}
+          <article
+            className="img-chat"
+            onClick={() => navigate(`../client-profile/${getReceiver()}`)}
           >{`${
             getReceiver()?.charAt(0)?.toUpperCase() +
             getReceiver()?.slice(1).slice(0, 1)

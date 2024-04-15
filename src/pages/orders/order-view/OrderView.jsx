@@ -1,6 +1,5 @@
 import React from "react";
 import "./orderview.css";
-import { IoMdDownload } from "react-icons/io";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { IoChatbubblesSharp, IoCloseOutline } from "react-icons/io5";
 import Chat from "../../../components/chat/Chat";
@@ -23,8 +22,9 @@ import { useSolutionModal } from "../../BiddingModal/SolutionModal";
 import { toast } from "react-hot-toast";
 import RatingOrderView from "../../../components/rating/order-review/RatingOrderView";
 import { IoPersonSharp } from "react-icons/io5";
-import { IoMdAdd } from "react-icons/io";
 import ViewMore from "../../../components/more/ScrollMore";
+import { MdHelpOutline } from "react-icons/md";
+import Support from "../../../components/support/Support";
 
 const FloatingButton = ({ onClick }) => {
   return (
@@ -45,7 +45,8 @@ const OrderView = () => {
 
   const { orderId } = useParams();
 
-  const { loadingAttachemnt, uploadAttachment } = useOrderContext();
+  const { loadingAttachemnt, uploadAttachment, help, openHelp } =
+    useOrderContext();
 
   const [orderContent, setOrderContent] = useState();
 
@@ -147,11 +148,13 @@ const OrderView = () => {
     getOrder(orderId);
   }, [orderId]);
 
-  useEffect(() => {
-    orderContent && setMyBid(checkBid(orderContent, loadedUserProfile));
-  }, [orderContent]);
+  const myBid = checkBid(orderContent, loadedUserProfile);
 
-  const [myBid, setMyBid] = useState(checkBid(orderContent, loadedUserProfile));
+  // useEffect(() => {
+  //   orderContent && setMyBid(checkBid(orderContent, loadedUserProfile));
+  // }, [orderContent]);
+
+  // const myBid = true;
 
   const { BiddingModal, setShowBiddingModal } = useBiddingModal(
     orderContent,
@@ -229,13 +232,23 @@ const OrderView = () => {
       ) : (
         orderContent && (
           <>
+            {!openHelp && (
+              <span className="help-icon">
+                Help
+                <MdHelpOutline
+                  style={{ cursor: "pointer" }}
+                  size={30}
+                  title="Contact support team"
+                  onClick={help}
+                />
+              </span>
+            )}
             <div className="order-details">
               <strong style={{ fontWeight: "bold" }}>
                 {orderContent?.title}
               </strong>
               <div className="order-elements">
                 <article className="category">{orderContent?.category}</article>
-                {console.log(orderContent)}
                 {orderContent?.subject && (
                   <article>{orderContent?.subject}</article>
                 )}
@@ -535,10 +548,26 @@ const OrderView = () => {
                 </div>
               )}
             </div>
-            {(myBid ||
-              orderContent?.freelancer?.user.username ===
-                loadedUserProfile?.username) && (
+            {orderContent?.freelancer?.user.username ===
+              loadedUserProfile?.username && (
               <div className={`chat-drawer ${isChatOpen ? "show" : ""}`}>
+                {openHelp ? (
+                  <Support />
+                ) : (
+                  <Chat
+                    orderId={orderId}
+                    client={orderContent.client}
+                    freelancer={orderContent.freelancer}
+                    isChatOpen={isChatOpen}
+                    toggleChat={toggleChat}
+                  />
+                )}
+              </div>
+            )}
+            {myBid &&
+              (openHelp ? (
+                <Support />
+              ) : (
                 <Chat
                   orderId={orderId}
                   client={orderContent.client}
@@ -546,8 +575,7 @@ const OrderView = () => {
                   isChatOpen={isChatOpen}
                   toggleChat={toggleChat}
                 />
-              </div>
-            )}
+              ))}
             {(myBid ||
               orderContent?.freelancer?.user.username ===
                 loadedUserProfile?.username) && (

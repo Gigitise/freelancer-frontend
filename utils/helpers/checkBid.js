@@ -1,5 +1,7 @@
 export const checkBid = (orderContent, loadedUserProfile) => {
-  return orderContent?.bidders?.some(
+  const isMyBid = orderContent?.bidders?.some(
     (bid) => bid?.freelancer?.user.username === loadedUserProfile?.username
   );
+
+  return isMyBid;
 };

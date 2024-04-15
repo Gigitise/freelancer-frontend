@@ -40,6 +40,16 @@ export const OrderProvider = (props) => {
     next: null,
   });
 
+  const [openHelp, setOpenHelp] = useState(false);
+
+  const help = () => {
+    setOpenHelp(true);
+  };
+
+  const closeHelp = () => {
+    setOpenHelp(false);
+  };
+
   const [loadingAvailable, setLoadingAvailable] = useState(true);
 
   const [loadingInProgress, setLoadingInProgress] = useState(true);
@@ -576,6 +586,9 @@ export const OrderProvider = (props) => {
         loadingAttachemnt,
         ordersBidding,
         loadingBids,
+        openHelp,
+        closeHelp,
+        help,
         createOrder,
         updateInstructions,
         completeOrder,

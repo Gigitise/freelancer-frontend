@@ -20,15 +20,11 @@ const Navbar = () => {
 
   const [showMoreElements, setShowMoreElements] = useState(false);
   const [searchVisible, setSearchVisible] = useState(false);
-  
 
   const navRef = useRef(null);
 
-
   const { loadingUserProfile, loadedUserProfile, handleLogOut } =
     useAuthContext();
-
-  const [userProfile, setUserProfile] = useState(loadedUserProfile);
 
   const { unreadNotifCount } = useNotificationContext();
 
@@ -58,22 +54,29 @@ const Navbar = () => {
   };
 
   return (
-    <div className={`top-nav ${searchVisible ? "search-visible" : ""} ${theme === "light" ? "light-mode" : "dark-mode"} `}
-    style={{ backgroundColor: theme === "light" ? "#7fc2f5" : "", borderBottom: theme === "light" ? "#fff" : "" }}>
+    <div
+      className={`top-nav ${searchVisible ? "search-visible" : ""} ${
+        theme === "light" ? "light-mode" : "dark-mode"
+      } `}
+      style={{
+        backgroundColor: theme === "light" ? "#7fc2f5" : "",
+        borderBottom: theme === "light" ? "#fff" : "",
+      }}
+    >
       <div className="icons">
-        <div className="search-icon" onClick={() => setSearchVisible(!searchVisible)}>
-        {searchVisible && (
-            <MdKeyboardArrowLeft
-            size={iconSize}
-              
-            />
-          )}
-          <IoSearchOutline 
-          size={iconSize}
-          />
+        <div
+          className="search-icon"
+          onClick={() => setSearchVisible(!searchVisible)}
+        >
+          {searchVisible && <MdKeyboardArrowLeft size={iconSize} />}
+          <IoSearchOutline size={iconSize} />
         </div>
       </div>
-      <div className={`search-nav ${searchVisible ? "visible" : "mobile-invisible"}`}>
+      <div
+        className={`search-nav ${
+          searchVisible ? "visible" : "mobile-invisible"
+        }`}
+      >
         <input
           value={searchQuery}
           onChange={(e) => searchOrdersFromQuery(e.target.value)}
@@ -97,56 +100,63 @@ const Navbar = () => {
         )}
       </div>
       <div className={`profile ${searchVisible ? "visible" : ""}`}>
-       <div
-  className={`mini-elements ${showMoreElements ? "show-mini-elements" : "hide-mini-elements"}`}
-  ref={navRef}
->
-  <div onClick={() => handleLogOut()}>
-    <article className="logout">Logout</article>
-    <span>
-      <IoIosLogOut className="desc" size={iconSize} />
-    </span>
-  </div>
-  <div
-    className="notif-bell"
-    style={{ cursor: "pointer" }}
-    onClick={() => navigate("./notifications")}
-  >
-    <span className="desc">Notifications</span>
-    <span>
-      <IoMdNotificationsOutline className="notif-icon" size={iconSize} />
-    </span>
-    {unreadNotifCount > 0 && (
-      <div className="red">
-        <div>
-          <article>{unreadNotifCount > 9 ? "9+" : unreadNotifCount}</article>
+        <div
+          className={`mini-elements ${
+            showMoreElements ? "show-mini-elements" : "hide-mini-elements"
+          }`}
+          ref={navRef}
+        >
+          <div onClick={() => handleLogOut()}>
+            <article className="logout">Logout</article>
+            <span>
+              <IoIosLogOut className="desc" size={iconSize} />
+            </span>
+          </div>
+          <div
+            className="notif-bell"
+            style={{ cursor: "pointer" }}
+            onClick={() => navigate("./notifications")}
+          >
+            <span className="desc">Notifications</span>
+            <span>
+              <IoMdNotificationsOutline
+                className="notif-icon"
+                size={iconSize}
+              />
+            </span>
+            {unreadNotifCount > 0 && (
+              <div className="red">
+                <div>
+                  <article>
+                    {unreadNotifCount > 9 ? "9+" : unreadNotifCount}
+                  </article>
+                </div>
+              </div>
+            )}
+          </div>
+          <div className="settings" onClick={() => navigate("./settings")}>
+            <span className="desc">Settings</span>
+            <span>
+              <IoMdSettings style={{ cursor: "pointer" }} size={iconSize} />
+            </span>
+          </div>
         </div>
-      </div>
-    )}
-  </div>
-  <div className="settings" onClick={() => navigate("./settings")}>
-    <span className="desc">Settings</span>
-    <span>
-      <IoMdSettings style={{ cursor: "pointer" }} size={iconSize} />
-    </span>
-  </div>
-</div>
 
         <div className="profile-info" onClick={() => navigate("./profile")}>
           <article
             className={loadingUserProfile ? "username-skeleton" : ""}
             style={{ width: loadingUserProfile ? "3rem" : "" }}
           >
-            {userProfile?.username}
+            {loadedUserProfile?.username}
           </article>
-          {userProfile?.profile_photo ? (
+          {loadedUserProfile?.profile_photo ? (
             <img
               style={{
                 animation: loadingUserProfile
                   ? `skeleton-loading 1s linear infinite alternate`
                   : "",
               }}
-              src={userProfile?.profile_photo}
+              src={loadedUserProfile?.profile_photo}
               alt="profile cover"
             />
           ) : (
@@ -158,10 +168,10 @@ const Navbar = () => {
               }}
               className="img-placeholder"
             >
-              {userProfile &&
+              {loadedUserProfile &&
                 `${
-                  userProfile?.username?.charAt(0)?.toUpperCase() +
-                  userProfile?.username.slice(1).slice(0, 1)
+                  loadedUserProfile?.username?.charAt(0)?.toUpperCase() +
+                  loadedUserProfile?.username.slice(1).slice(0, 1)
                 }`}
             </article>
           )}

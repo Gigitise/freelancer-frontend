@@ -13,6 +13,14 @@ export const ChatProvider = (props) => {
 
   const isSecureConnection = window.location.protocol === "https:";
 
+  const [loadingSupportChat, setLoadingSupportChat] = useState(true);
+
+  const [supportChats, setSupportChats] = useState({
+    count: null,
+    list: [],
+    next: null,
+  });
+
   const { decodedToken } = useJwt(userToken);
 
   const [user, setUser] = useState();
@@ -76,8 +84,8 @@ export const ChatProvider = (props) => {
       if (getOrderChats.ok) {
         setChats((prev) => {
           return {
-            ...prev,
-            list: prev.list.concat(chats.results),
+            // ...prev,
+            list: chats.results,
             count: chats.count,
             next: chats.next,
           };
@@ -89,6 +97,67 @@ export const ChatProvider = (props) => {
       console.log(error);
     } finally {
       setLoadingChats(false);
+    }
+  };
+
+  const sendSupportChat = async (msg, orderId) => {
+    const chatsUrl = `${
+      import.meta.env.VITE_API_URL
+    }/support/?order=${orderId}`;
+    try {
+      const sendChat = await fetch(chatsUrl, {
+        method: "post",
+        headers,
+        body: JSON.stringify({
+          topic: orderId,
+          message: msg,
+          receiver: "gigitise",
+          // order:
+        }),
+      });
+
+      if (sendChat.ok) {
+        const response = await sendChat.json();
+        setSupportChats((prev) => {
+          return {
+            ...prev,
+            list: prev.list?.concat(response),
+          };
+        });
+      } else {
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+    }
+  };
+
+  const getSupportChats = async (orderId) => {
+    const chatsUrl = `${import.meta.env.VITE_API_URL}/support`;
+    try {
+      const getOrderChats = await fetch(chatsUrl, {
+        headers,
+      });
+
+      const chats = await getOrderChats.json();
+
+      console.log(chats);
+
+      if (getOrderChats.ok) {
+        setSupportChats((prev) => {
+          return {
+            list: chats.results,
+            count: chats.count,
+            next: chats.next,
+          };
+        });
+      } else {
+        console.error("Error fetching support chats");
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoadingSupportChat(false);
     }
   };
 
@@ -137,9 +206,63 @@ export const ChatProvider = (props) => {
     };
   }, [user, decodedToken]);
 
+  useEffect(() => {
+    setUser(decodedToken?.user_id);
+    if (user) {
+      const newSocket = new WebSocket(
+        `${
+          isSecureConnection
+            ? import.meta.env.VITE_WSS_URL
+            : import.meta.env.VITE_WS_URL
+        }/support/${user}/`
+      );
+      setSocket(newSocket);
+
+      newSocket.onmessage = (event) => {
+        const receivedData = JSON.parse(event.data);
+        if (receivedData.type === "support_chat") {
+          const newChat = receivedData.message.sent_message;
+          setSupportChats((prev) => {
+            return {
+              ...prev,
+              list: prev.list.concat([newChat]),
+            };
+          });
+          const sound = new Audio(newMessageTone);
+          sound.play();
+        } else if (receivedData.type === "typing_status") {
+          setTypingData(receivedData.message);
+          clearTimeout(typingTimer);
+          typingTimer = setTimeout(() => {
+            setTypingData(null);
+          }, 2000);
+        }
+      };
+      setSocket(newSocket);
+    } else {
+      socket?.close();
+    }
+
+    return () => {
+      if (socket) {
+        socket.close();
+      }
+    };
+  }, [user, decodedToken]);
+
   return (
     <ChatContext.Provider
-      value={{ loadingChats, chats, socket, typingData, getChats, sendChat }}
+      value={{
+        loadingChats,
+        chats,
+        socket,
+        typingData,
+        supportChats,
+        getSupportChats,
+        sendSupportChat,
+        getChats,
+        sendChat,
+      }}
     >
       {props.children}
     </ChatContext.Provider>

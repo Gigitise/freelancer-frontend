@@ -215,6 +215,15 @@ textarea {
   gap: 0.5rem;
 }
 
+.help-icon {
+  position: absolute;
+  right: 1%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 1;
+}
+
 .skeleton-heading * {
   position: inherit;
   width: 100%;
