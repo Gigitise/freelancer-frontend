@@ -24,7 +24,7 @@ function App() {
       <ThemeContext.Provider value={{ theme, toggleTheme }}>
         <Routes>
           <Route path="login" element={<Login />} />
-          <Route path="/app/*" element={userToken ? <Main /> : <Login />} />
+          <Route path="/*" element={userToken ? <Main /> : <Login />} />
           <Route path="reset-password" element={<PasswordReset />} />
           <Route
             path="/used-token/:uidb64/:token/"

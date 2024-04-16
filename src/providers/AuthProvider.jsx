@@ -53,7 +53,7 @@ export const AuthProvider = (props) => {
   const handleLogOut = () => {
     removeAccessToken();
     setUserToken(null);
-    navigate("/app");
+    navigate("/");
   };
 
   const handleRegister = async (e) => {
@@ -82,7 +82,7 @@ export const AuthProvider = (props) => {
       if (registerClient.ok) {
         console.log("Registration success");
         setSuccessRegister(true);
-        navigate("/app");
+        navigate("/");
       } else {
         const res = await registerClient.json();
         const status = registerClient.status;
@@ -139,11 +139,11 @@ export const AuthProvider = (props) => {
         getUserToken();
         setLoading(false);
         if (orderId) {
-          navigate(`/app/order/${orderId}`);
+          navigate(`/order/${orderId}`);
         } else if (redirect) {
-          navigate(`/app/${redirect}`);
+          navigate(`/${redirect}`);
         } else {
-          navigate("/app");
+          navigate("/");
         }
         // const refreshToken = token.refresh
       } else if (status === 401) {
