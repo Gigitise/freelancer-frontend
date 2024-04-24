@@ -9,6 +9,6 @@ RUN npm run build
 
 FROM nginx:alpine
 
-COPY --from=builder /freelancer/dist /var/www/freelancer
+COPY --from=builder /freelancer/dist /var/www/freelancers.gigitise.com
 
-# COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+# COPY ./nginx/freelancers.gigitise.com /etc/nginx/sites-available
